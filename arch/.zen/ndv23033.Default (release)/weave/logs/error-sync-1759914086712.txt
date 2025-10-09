@@ -1,0 +1,43 @@
+1759910219731	Sync.SyncScheduler	DEBUG	Next sync in 3600000 ms. (why=schedule)
+1759913820536	Sync.Service	DEBUG	User-Agent: Zen/1.16.3b (Linux x86_64) FxSync/1.145.0.20251004024024.desktop
+1759913820536	Sync.Service	INFO	Starting sync at 2025-10-08 03:57:00 in browser session fqJTTEst5_5x
+1759913820540	Sync.SyncScheduler	DEBUG	Clearing sync triggers and the global score.
+1759913820540	Sync.Status	INFO	Resetting Status.
+1759913820540	Sync.Status	DEBUG	Status.service: success.status_ok => success.status_ok
+1759913820541	FirefoxAccounts	DEBUG	FxAccountsProfileClient: Requested profile
+1759913820541	FirefoxAccounts	DEBUG	getOAuthToken enter
+1759913820541	FirefoxAccounts	TRACE	getCachedToken returning cached token
+1759913820541	FirefoxAccounts	DEBUG	getOAuthToken returning a cached token
+1759913820541	Services.Common.RESTRequest	DEBUG	GET request to https://profile.accounts.firefox.com/v1/profile
+1759913820542	Sync.SyncAuthManager	INFO	Getting sync key
+1759913820542	FirefoxAccounts	DEBUG	getOAuthToken enter
+1759913820542	FirefoxAccounts	TRACE	getCachedToken returning cached token
+1759913820542	FirefoxAccounts	DEBUG	getOAuthToken returning a cached token
+1759913820542	Sync.SyncAuthManager	INFO	Getting a sync token from: https://token.services.mozilla.com/1.0/sync/1.5
+1759913820542	Sync.SyncAuthManager	DEBUG	Getting a token using OAuth
+1759913820542	Services.Common.TokenServerClient	DEBUG	Beginning OAuth token exchange: https://token.services.mozilla.com/1.0/sync/1.5
+1759913820542	Services.Common.RESTRequest	DEBUG	GET request to https://token.services.mozilla.com/1.0/sync/1.5
+1759913910633	Services.Common.RESTRequest	DEBUG	GET https://token.services.mozilla.com/1.0/sync/1.5 failed: 2152398862 - NS_ERROR_NET_TIMEOUT
+1759913910633	Sync.SyncAuthManager	ERROR	Non-authentication error in _fetchTokenForUser: TokenServerClientNetworkError({"error":{}})(resource://services-common/tokenserverclient.sys.mjs:28:36) JS Stack trace: TokenServerClientNetworkError@tokenserverclient.sys.mjs:51:16
+_tokenServerExchangeRequest@tokenserverclient.sys.mjs:235:13
+1759913910634	Sync.Status	DEBUG	Status.login: success.login => error.login.reason.network
+1759913910634	Sync.Status	DEBUG	Status.service: success.status_ok => error.login.failed
+1759913910635	FirefoxAccounts	TRACE	Getting command keys: https://identity.mozilla.com/cmd/open-uri
+1759913910635	Sync.SyncAuthManager	ERROR	Failed to fetch a token for authentication: TokenServerClientNetworkError({"error":{}})(resource://services-common/tokenserverclient.sys.mjs:28:36) JS Stack trace: TokenServerClientNetworkError@tokenserverclient.sys.mjs:51:16
+_tokenServerExchangeRequest@tokenserverclient.sys.mjs:235:13
+1759913910637	FirefoxAccounts	TRACE	Getting command keys: https://identity.mozilla.com/cmd/close-uri/v1
+1759913910638	Services.Common.RESTRequest	DEBUG	GET https://profile.accounts.firefox.com/v1/profile failed: 2152398862 - NS_ERROR_NET_TIMEOUT
+1759913910638	FirefoxAccounts	ERROR	Background refresh of profile failed: {"name":"FxAccountsProfileClientError","code":null,"errno":998,"error":"NETWORK_ERROR","message":"[Exception... \"NS_ERROR_NET_TIMEOUT\"  nsresult: \"0x804b000e (NS_ERROR_NET_TIMEOUT)\"  location: \"JS frame :: resource://services-common/rest.sys.mjs :: onStopRequest :: line 478\"  data: no]"}
+1759913910638	FirefoxAccounts	ERROR	Background refresh of profile failed: {"name":"FxAccountsProfileClientError","code":null,"errno":998,"error":"NETWORK_ERROR","message":"[Exception... \"NS_ERROR_NET_TIMEOUT\"  nsresult: \"0x804b000e (NS_ERROR_NET_TIMEOUT)\"  location: \"JS frame :: resource://services-common/rest.sys.mjs :: onStopRequest :: line 478\"  data: no]"}
+1759914086705	Sync.Resource	DEBUG	GET fail 401 https://sync-1-us-west1-g.sync.services.mozilla.com/1.5/208644875/info/collections
+1759914086706	Sync.Resource	WARN	GET request to https://sync-1-us-west1-g.sync.services.mozilla.com/1.5/208644875/info/collections failed with status 401
+1759914086706	Sync.Service	INFO	Logging out
+1759914086706	Sync.SyncScheduler	DEBUG	Next sync in 3600000 ms. (why=schedule)
+1759914086707	Sync.ErrorHandler	INFO	Got 401 response; resetting clusterURL.
+1759914086707	Sync.ErrorHandler	DEBUG	New mid-sync 401 failure. Making a note.
+1759914086707	Sync.ErrorHandler	INFO	Attempting to schedule another sync.
+1759914086708	Sync.Service	ERROR	Aborting sync: failed to get collections.
+1759914086709	Sync.ErrorHandler	ERROR	Sync encountered an error: {"data":"0","url":"https://sync-1-us-west1-g.sync.services.mozilla.com/1.5/208644875/info/collections","status":401,"success":false,"headers":{"accept-ranges":"bytes","content-length":"1","content-type":"application/json","date":"Wed, 08 Oct 2025 09:01:26 GMT","server":"nginx/1.22.0","vary":"Origin, Access-Control-Request-Method, Access-Control-Request-Headers","via":"1.1 google, 1.1 varnish, 1.1 varnish","x-cache":"MISS, MISS","x-cache-hits":"0, 0","x-firefox-early-data":"sent","x-firefox-spdy":"h2","x-served-by":"cache-iad-kiad7000101-IAD, cache-iad-kiad7000101-IAD","x-timer":"S1759914087.539097,VS0,VE78","x-weave-timestamp":"1759914086.57"},"obj":0}
+1759914086709	Sync.SyncScheduler	DEBUG	Next sync in 3600000 ms. (why=reschedule)
+1759914086709	Sync.Telemetry	INFO	Early submission of sync telemetry due to changed IDs/NodeType
+1759914086712	Sync.Service	DEBUG	Exception calling anonymous function: {"data":"0","url":"https://sync-1-us-west1-g.sync.services.mozilla.com/1.5/208644875/info/collections","status":401,"success":false,"headers":{"accept-ranges":"bytes","content-length":"1","content-type":"application/json","date":"Wed, 08 Oct 2025 09:01:26 GMT","server":"nginx/1.22.0","vary":"Origin, Access-Control-Request-Method, Access-Control-Request-Headers","via":"1.1 google, 1.1 varnish, 1.1 varnish","x-cache":"MISS, MISS","x-cache-hits":"0, 0","x-firefox-early-data":"sent","x-firefox-spdy":"h2","x-served-by":"cache-iad-kiad7000101-IAD, cache-iad-kiad7000101-IAD","x-timer":"S1759914087.539097,VS0,VE78","x-weave-timestamp":"1759914086.57"},"obj":0}
