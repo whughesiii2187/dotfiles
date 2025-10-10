@@ -115,4 +115,14 @@ alias v="nvim"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-export PATH=/home/bill/.local/bin:$PATH
+# -----------------------------------------------------
+# Fastfetch if in Hyprland
+# -----------------------------------------------------
+# if [[ $(tty) == *"pts"* ]]; then
+#     fastfetch
+# else
+#     echo
+#     echo "Start Hyprland with command Hyprland"
+# fi
+#
+# alias ml4w-hyprland='~/.config/ml4w/apps/ML4W_Hyprland_Settings-x86_64.AppImage'

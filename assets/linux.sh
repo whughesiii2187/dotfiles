@@ -1,0 +1,72 @@
+#!/bin/bash
+set -euo pipefail
+
+echo -e "${GREEN}Updating system...${NC}"
+sudo pacman -Syu --noconfirm
+
+echo -e "${GREEN}Installing official repo packages...${NC}"
+for pkg in "${pacpkg[@]}"; do
+  if $DRY_RUN; then
+    echo "Installing (pacman): $pkg"
+  else
+    sudo pacman -S --noconfirm --needed "$pkg"
+  fi
+done
+
+echo -e "${GREEN}Enabling services...${NC}"
+sudo systemctl enable --now bluetooth.service
+sudo systemctl enable --now power-profiles-daemon.service
+sudo systemctl enable cosmic-greeter.service
+sudo systemctl enable --now NetworkManager.service
+sudo systemctl stop systemd-networkd && sudo systemctl disable systemd-networkd
+systemctl --user enable --now pipewire.socket pipewire-pulse.socket 2>/dev/null || true
+
+# Install yay (AUR helper)
+# Check if aur.archlinux.org is up
+echo -e "${GREEN}Checking if aur.archlinux.org is reachable...${NC}"
+if curl -s --head --fail https://aur.archlinux.org >/dev/null; then
+  echo -e "${GREEN}AUR is up. Installing yay from aur.archlinux.org...${NC}"
+  source yay.sh
+else
+  echo -e "${GREEN}aur.archlinux.org is DOWN. Falling back to GitHub AUR mirror...${NC}"
+  source yay-down.sh
+fi
+
+# Set Zsh as default shell
+if [[ "$SHELL" != "/bin/zsh" ]]; then
+  echo -e "${GREEN}Setting Zsh as default shell...${NC}"
+  chsh -s "$(which zsh)"
+fi
+
+# Install OhMyZSH
+echo -e "${GREEN}Installing OhMyZSH...${NC}"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# Install Powerlevel10k theme
+echo -e "${GREEN}Installing Powerlevel10k theme...${NC}"
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
+sed -i 's|^ZSH_THEME=.*|ZSH_THEME="powerlevel10k/powerlevel10k"|' ~/.zshrc
+
+# Install LazyVim dependencies
+for pkg in lazygit tree-sitter-cli fzf fd; do
+  echo -e "${GREEN} Installing LazyVim dependency $pkg...${NC}"
+  npm install -g "$pkg"
+done
+
+# Hyprland Settings App
+ml4w_app="com.ml4w.hyprlandsettings"
+ml4w_app_repo="hyprland-settings"
+echo ":: Installing $ml4w_app"
+bash -c "$(curl -s https://raw.githubusercontent.com/mylinuxforwork/$ml4w_app_repo/master/setup.sh)"
+
+# stow dotfiles
+mkdir ~/dotfiles
+cd /tmp/dotfiles
+mv arch ~/dotfiles/
+mv shared ~/dotfiles/
+
+cd ~/dotfiles/
+stow */
+
+## Anything else to do??
+echo -e "${GREEN}✅ Done!"
