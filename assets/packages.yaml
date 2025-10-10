@@ -2,6 +2,7 @@ pacpkg:
   - bluez
   - brightnessctl
   - btop
+  - bottom
   - cosmic
   - dunst
   - fastfetch
@@ -12,6 +13,7 @@ pacpkg:
   - hyprpaper
   - jq
   - libreoffice-fresh
+  - lazygit
   - neovim
   - networkmanager
   - npm
@@ -21,6 +23,7 @@ pacpkg:
   - pipewire
   - pipewire-jack
   - power-profiles-daemon
+  - python
   - qt5-wayland
   - qt6-wayland
   - rofi-wayland
