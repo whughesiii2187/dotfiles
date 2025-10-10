@@ -13,7 +13,6 @@ pacpkg:
   - hyprpaper
   - jq
   - libreoffice-fresh
-  - lazygit
   - neovim
   - networkmanager
   - npm
