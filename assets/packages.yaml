@@ -72,3 +72,8 @@ brewcask:
   - font-0xproto-nerd-font
   - powershell
   - wezterm
+astrodeps:
+  - lazygit 
+  - tree-sitter-cli 
+  - fzf 
+  - fd
