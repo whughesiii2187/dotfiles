@@ -26,7 +26,7 @@ pacpkg:
   # - qt5-wayland
   # - qt6-wayland
   # - rofi-wayland
-  - steam
+  - stow
   # - thunar
   - ttf-0xproto-nerd
   # - ttf-fira-code
