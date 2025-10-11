@@ -8,6 +8,7 @@ if ! command -v yay &> /dev/null; then
   cd ~
 else
   echo -e "${GREEN} Yay is already installed, adding packages!!${NC}"
+fi
 
 echo -e "${GREEN}Installing AUR packages with yay...${NC}"
 yay -Syu --noconfirm
