@@ -42,12 +42,12 @@ pacpkg:
   - wget
   - wireplumber
   - wl-clipboard
-  # - wlogout
   # - xdg-desktop-portal-hyprland
   - zsh
 aurpkg:
   - powershell-bin
   - ripgrep
+  # - wlogout
   - zen-browser-bin
 brewpkg:
   - azure-cli
