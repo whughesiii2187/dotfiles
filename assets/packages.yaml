@@ -1,17 +1,17 @@
 pacpkg:
   - bluez
-  - brightnessctl
+  # - brightnessctl
   - btop
   - bottom
   - cosmic
-  - dunst
-  - fastfetch
-  - flatpak
-  - gum
-  - hyprland
-  - hyprlock
-  - hyprpaper
-  - jq
+  # - dunst
+  # - fastfetch
+  # - flatpak
+  # - gum
+  # - hyprland
+  # - hyprlock
+  # - hyprpaper
+  # - jq
   - libreoffice-fresh
   - neovim
   - networkmanager
@@ -22,27 +22,27 @@ pacpkg:
   - pipewire
   - pipewire-jack
   - power-profiles-daemon
-  - python
-  - qt5-wayland
-  - qt6-wayland
-  - rofi-wayland
+  # - python
+  # - qt5-wayland
+  # - qt6-wayland
+  # - rofi-wayland
   - steam
-  - thunar
+  # - thunar
   - ttf-0xproto-nerd
-  - ttf-fira-code
-  - ttf-fira-sans
-  - ttf-firacode-nerd
-  - ttf-font-awesome
+  # - ttf-fira-code
+  # - ttf-fira-sans
+  # - ttf-firacode-nerd
+  # - ttf-font-awesome
   - unzip
   - vlc
-  - waybar
-  - wayland
+  # - waybar
+  # - wayland
   - wezterm
   - wget
   - wireplumber
   - wl-clipboard
-  - wlogout
-  - xdg-desktop-portal-hyprland
+  # - wlogout
+  # - xdg-desktop-portal-hyprland
   - zsh
 aurpkg:
   - powershell-bin
