@@ -73,4 +73,9 @@ if [[ "$SHELL" != "/bin/zsh" ]]; then
   chsh -s "$(which zsh)"
 fi
 
-echo -e "${GREEN}✅ Done!"
+echo -e "{GREEN}PLEASE CHANGE YOUR PASSWORD NOW"
+passwd
+
+echo -e "${GREEN}✅ Done!! Rebooting system in 30 seconds... ${NC}"
+sleep 30s
+reboot
