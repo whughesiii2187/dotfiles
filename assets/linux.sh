@@ -24,12 +24,6 @@ else
   source yay-down.sh
 fi
 
-# Set Zsh as default shell
-if [[ "$SHELL" != "/bin/zsh" ]]; then
-  echo -e "${GREEN}Setting Zsh as default shell...${NC}"
-  chsh -s "$(which zsh)"
-fi
-
 # Install OhMyZSH
 echo -e "${GREEN}Installing OhMyZSH...${NC}"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -37,7 +31,6 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 # Install Powerlevel10k theme
 echo -e "${GREEN}Installing Powerlevel10k theme...${NC}"
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
-sed -i 's|^ZSH_THEME=.*|ZSH_THEME="powerlevel10k/powerlevel10k"|' ~/.zshrc
 
 # Install LazyVim dependencies
 for pkg in lazygit tree-sitter-cli fzf fd; do
@@ -50,10 +43,10 @@ chmod +x gdu_linux_amd64
 mv gdu_linux_amd64 /usr/bin/gdu
 
 # Hyprland Settings App
-ml4w_app="com.ml4w.hyprlandsettings"
-ml4w_app_repo="hyprland-settings"
-echo ":: Installing $ml4w_app"
-bash -c "$(curl -s https://raw.githubusercontent.com/mylinuxforwork/$ml4w_app_repo/master/setup.sh)"
+#ml4w_app="com.ml4w.hyprlandsettings"
+#ml4w_app_repo="hyprland-settings"
+#echo ":: Installing $ml4w_app"
+#bash -c "$(curl -s https://raw.githubusercontent.com/mylinuxforwork/$ml4w_app_repo/master/setup.sh)"
 
 # stow dotfiles
 mkdir ~/dotfiles
@@ -64,7 +57,7 @@ mv shared ~/dotfiles/
 cd ~/dotfiles/
 stow */
 
-
+# Enable services
 echo -e "${GREEN}Enabling services...${NC}"
 sudo systemctl enable --now bluetooth.service
 sudo systemctl enable --now power-profiles-daemon.service
@@ -74,4 +67,10 @@ sudo systemctl stop systemd-networkd && sudo systemctl disable systemd-networkd
 systemctl --user enable --now pipewire.socket pipewire-pulse.socket 2>/dev/null || true
 
 ## Anything else to do??
+# Set Zsh as default shell
+if [[ "$SHELL" != "/bin/zsh" ]]; then
+  echo -e "${GREEN}Setting Zsh as default shell...${NC}"
+  chsh -s "$(which zsh)"
+fi
+
 echo -e "${GREEN}✅ Done!"
