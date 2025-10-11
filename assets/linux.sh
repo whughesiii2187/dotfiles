@@ -16,6 +16,7 @@ done
 # Install yay (AUR helper)
 # Check if aur.archlinux.org is up
 echo -e "${GREEN}Checking if aur.archlinux.org is reachable...${NC}"
+URL="https://aur.archlinux.org"
 STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
 if [ "$STATUS" -eq 200 ]; then
   echo -e "${GREEN}AUR is up. Installing yay from aur.archlinux.org...${NC}"
