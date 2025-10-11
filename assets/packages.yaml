@@ -5,7 +5,7 @@ pacpkg:
   - bottom
   - cosmic
   # - dunst
-  # - fastfetch
+  - fastfetch
   # - flatpak
   - gdu
   # - gum
