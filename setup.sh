@@ -11,12 +11,12 @@ YAML_FILE="${ASSETS_DIR}/packages.yaml"
 
 if [[ "$(uname)" == "Darwin" ]]; then
     SETUP_SCRIPT="${ASSETS_DIR}/macos.sh"
-elif [[ "$(uname -n)" == "Li" ]]; then
+elif [[ "$(uname)" == "Linux" ]]; then
     SETUP_SCRIPT="${ASSETS_DIR}/linux.sh"
 fi
 
 DRY_RUN=false
-if [[ "$1" == "--dry-run" ]]; then
+if [[ "${1:-}" == "--dry-run" ]]; then
   DRY_RUN=true
 fi
 
@@ -47,4 +47,4 @@ fi
 GREEN='\033[0;32m'
 NC='\033[0m'
 
-source SETUP_SCRIPT
+source $SETUP_SCRIPT
