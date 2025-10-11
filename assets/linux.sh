@@ -18,10 +18,10 @@ done
 echo -e "${GREEN}Checking if aur.archlinux.org is reachable...${NC}"
 if curl -s --head --fail https://aur.archlinux.org >/dev/null; then
   echo -e "${GREEN}AUR is up. Installing yay from aur.archlinux.org...${NC}"
-  source yay.sh
+  source $ASSESTS_DIR/yay.sh
 else
   echo -e "${GREEN}aur.archlinux.org is DOWN. Falling back to GitHub AUR mirror...${NC}"
-  source yay-down.sh
+  source $ASSETS_DIR/yay-down.sh
 fi
 
 # Install OhMyZSH
