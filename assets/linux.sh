@@ -16,9 +16,10 @@ done
 # Install yay (AUR helper)
 # Check if aur.archlinux.org is up
 echo -e "${GREEN}Checking if aur.archlinux.org is reachable...${NC}"
-if curl -s --head --fail https://aur.archlinux.org >/dev/null; then
+STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
+if [ "$STATUS" -eq 200 ]; then
   echo -e "${GREEN}AUR is up. Installing yay from aur.archlinux.org...${NC}"
-  source $ASSESTS_DIR/yay.sh
+  source $ASSETS_DIR/yay.sh
 else
   echo -e "${GREEN}aur.archlinux.org is DOWN. Falling back to GitHub AUR mirror...${NC}"
   source $ASSETS_DIR/yay-down.sh
@@ -26,6 +27,8 @@ fi
 
 # Install OhMyZSH
 echo -e "${GREEN}Installing OhMyZSH...${NC}"
+export RUNZSH=no
+export CHSH=no
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Install Powerlevel10k theme
