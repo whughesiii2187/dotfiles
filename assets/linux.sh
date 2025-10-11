@@ -39,7 +39,7 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~
 # Install LazyVim dependencies
 for pkg in lazygit tree-sitter-cli fzf fd; do
   echo -e "${GREEN} Installing LazyVim dependency $pkg...${NC}"
-  npm install -g "$pkg"
+  sudo npm install "$pkg"
 done
 
 # Hyprland Settings App
