@@ -13,14 +13,6 @@ for pkg in "${pacpkg[@]}"; do
   fi
 done
 
-echo -e "${GREEN}Enabling services...${NC}"
-sudo systemctl enable --now bluetooth.service
-sudo systemctl enable --now power-profiles-daemon.service
-sudo systemctl enable cosmic-greeter.service
-sudo systemctl enable --now NetworkManager.service
-sudo systemctl stop systemd-networkd && sudo systemctl disable systemd-networkd
-systemctl --user enable --now pipewire.socket pipewire-pulse.socket 2>/dev/null || true
-
 # Install yay (AUR helper)
 # Check if aur.archlinux.org is up
 echo -e "${GREEN}Checking if aur.archlinux.org is reachable...${NC}"
@@ -71,6 +63,15 @@ mv shared ~/dotfiles/
 
 cd ~/dotfiles/
 stow */
+
+
+echo -e "${GREEN}Enabling services...${NC}"
+sudo systemctl enable --now bluetooth.service
+sudo systemctl enable --now power-profiles-daemon.service
+sudo systemctl enable cosmic-greeter.service
+sudo systemctl enable --now NetworkManager.service
+sudo systemctl stop systemd-networkd && sudo systemctl disable systemd-networkd
+systemctl --user enable --now pipewire.socket pipewire-pulse.socket 2>/dev/null || true
 
 ## Anything else to do??
 echo -e "${GREEN}✅ Done!"
