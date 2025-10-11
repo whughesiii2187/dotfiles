@@ -36,9 +36,9 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 echo -e "${GREEN}Installing Powerlevel10k theme...${NC}"
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
 
-# Install LazyVim dependencies
+# Install Astronvim dependencies
 for pkg in lazygit tree-sitter-cli fzf fd; do
-  echo -e "${GREEN} Installing LazyVim dependency $pkg...${NC}"
+  echo -e "${GREEN} Installing Astronvim dependencies $pkg...${NC}"
   sudo npm install "$pkg"
 done
 
@@ -49,11 +49,8 @@ done
 #bash -c "$(curl -s https://raw.githubusercontent.com/mylinuxforwork/$ml4w_app_repo/master/setup.sh)"
 
 # stow dotfiles
-mkdir ~/dotfiles
 cd /tmp/dotfiles
-mv arch ~/dotfiles/
-mv shared ~/dotfiles/
-
+mv dotfiles ~/
 cd ~/dotfiles/
 stow */
 
