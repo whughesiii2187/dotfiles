@@ -37,7 +37,7 @@ echo -e "${GREEN}Installing Powerlevel10k theme...${NC}"
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
 
 # Install Astronvim dependencies
-for pkg in lazygit tree-sitter-cli fzf fd; do
+for pkg in "${astrodep[@]}"; do
   echo -e "${GREEN} Installing Astronvim dependencies $pkg...${NC}"
   sudo npm install "$pkg"
 done
