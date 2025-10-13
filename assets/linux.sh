@@ -42,11 +42,13 @@ for pkg in "${astrodeps[@]}"; do
   sudo npm install "$pkg"
 done
 
-# Hyprland Settings App
-#ml4w_app="com.ml4w.hyprlandsettings"
-#ml4w_app_repo="hyprland-settings"
-#echo ":: Installing $ml4w_app"
-#bash -c "$(curl -s https://raw.githubusercontent.com/mylinuxforwork/$ml4w_app_repo/master/setup.sh)"
+if [[ "$DESKTOP" == "hypr" ]]; then
+  # Hyprland Settings App
+  ml4w_app="com.ml4w.hyprlandsettings"
+  ml4w_app_repo="hyprland-settings"
+  echo ":: Installing $ml4w_app"
+  bash -c "$(curl -s https://raw.githubusercontent.com/mylinuxforwork/$ml4w_app_repo/master/setup.sh)"
+fi
 
 # stow dotfiles
 cd /tmp/dotfiles

@@ -4,6 +4,7 @@ pacpkg:
   - bottom
   - fastfetch
   - gdu
+  - kitty
   - libreoffice-fresh
   - neovim
   - networkmanager
