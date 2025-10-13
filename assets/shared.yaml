@@ -1,0 +1,29 @@
+pacpkg:
+  - bluez
+  - btop
+  - bottom
+  - fastfetch
+  - gdu
+  - libreoffice-fresh
+  - neovim
+  - networkmanager
+  - npm
+  - nvidia
+  - nvidia-settings
+  - nvidia-utils
+  - pipewire
+  - pipewire-jack
+  - power-profiles-daemon
+  - stow
+  - ttf-0xproto-nerd
+  - unzip
+  - vlc
+  - wezterm
+  - wget
+  - wireplumber
+  - wl-clipboard
+  - zsh
+aurpkg:
+  - powershell-bin
+  - ripgrep
+  - zen-browser-bin

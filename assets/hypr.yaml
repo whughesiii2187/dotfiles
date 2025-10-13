@@ -1,0 +1,23 @@
+pacpkg:
+  - brightnessctl
+  - dunst
+  - flatpak
+  - gum
+  - hyprland
+  - hyprlock
+  - hyprpaper
+  - jq
+  - python
+  - qt5-wayland
+  - qt6-wayland
+  - rofi-wayland
+  - thunar
+  - ttf-fira-code
+  - ttf-fira-sans
+  - ttf-firacode-nerd
+  - ttf-font-awesome
+  - waybar
+  - wayland
+  - xdg-desktop-portal-hyprland
+aurpkg:
+  - wlogout

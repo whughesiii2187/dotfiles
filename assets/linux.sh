@@ -52,6 +52,7 @@ done
 cd /tmp/dotfiles
 mv dotfiles ~/
 cd ~/dotfiles/
+rm ~/.zshrc
 stow */
 
 # Enable services
