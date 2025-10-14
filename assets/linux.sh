@@ -59,12 +59,17 @@ stow */
 
 # Enable services
 echo -e "${GREEN}Enabling services...${NC}"
-sudo systemctl enable --now bluetooth.service
-sudo systemctl enable --now power-profiles-daemon.service
-sudo systemctl enable cosmic-greeter.service
-sudo systemctl enable --now NetworkManager.service
+sudo systemctl enable bluetooth.service
+sudo systemctl enable power-profiles-daemon.service
+sudo systemctl enable NetworkManager.service
 sudo systemctl stop systemd-networkd && sudo systemctl disable systemd-networkd
-systemctl --user enable --now pipewire.socket pipewire-pulse.socket 2>/dev/null || true
+systemctl --user enable pipewire.socket pipewire-pulse.socket 2>/dev/null || true
+
+if [[ "$DESKTOP" == "hypr" ]]; then
+  sudo systemctl enable ly
+else
+  sudo systemctl enable cosmic-greeter.service
+fi
 
 ## Anything else to do??
 # Set Zsh as default shell
