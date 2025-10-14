@@ -9,9 +9,6 @@ pacpkg:
   - neovim
   - networkmanager
   - npm
-  - nvidia
-  - nvidia-settings
-  - nvidia-utils
   - pipewire
   - pipewire-jack
   - power-profiles-daemon
