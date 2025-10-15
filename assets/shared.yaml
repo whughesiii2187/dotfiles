@@ -17,7 +17,7 @@ pacpkg:
   - ttf-0xproto-nerd
   - unzip
   - vlc
-  - wezterm
+  # - wezterm
   - wget
   - wireplumber
   - wl-clipboard
