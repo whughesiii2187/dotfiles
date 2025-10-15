@@ -16,6 +16,7 @@ pacpkg:
   - stow
   - ttf-0xproto-nerd
   - unzip
+  - vim
   - vlc
   # - wezterm
   - wget
