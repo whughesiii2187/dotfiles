@@ -1,5 +1,7 @@
 pacpkg:
   - bluez
+  - bluez-utils
+  - blueman
   - btop
   - bottom
   - fastfetch
@@ -8,6 +10,7 @@ pacpkg:
   - libreoffice-fresh
   - neovim
   - networkmanager
+  - nwg-displays
   - npm
   - pipewire
   - pipewire-jack
