@@ -16,7 +16,7 @@ pacpkg:
   - ttf-fira-code
   - ttf-fira-sans
   - ttf-firacode-nerd
-  - ttf-font-awesome
+  - otf-font-awesome
   - waybar
   - wayland
   - xdg-desktop-portal-hyprland
