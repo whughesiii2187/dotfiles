@@ -55,7 +55,12 @@ cd /tmp/dotfiles
 mv dotfiles ~/
 cd ~/dotfiles/
 rm ~/.zshrc
-stow */
+
+if [[ "$DESKTOP" == "hypr" ]]; then
+  stow */ --ignore='cosmic'
+else
+  stow */
+fi
 
 # Enable services
 echo -e "${GREEN}Enabling services...${NC}"
@@ -63,7 +68,7 @@ sudo systemctl enable bluetooth.service
 sudo systemctl enable power-profiles-daemon.service
 sudo systemctl enable NetworkManager.service
 sudo systemctl stop systemd-networkd && sudo systemctl disable systemd-networkd
-systemctl --user enable pipewire.socket pipewire-pulse.socket 2>/dev/null || true
+systemctl --user enable pipewire.socket pipewire-pulse.socket wireplumber.service pipewire.service 2>/dev/null || true
 
 if [[ "$DESKTOP" == "hypr" ]]; then
   sudo systemctl enable ly
@@ -78,7 +83,7 @@ if [[ "$SHELL" != "/bin/zsh" ]]; then
   chsh -s "$(which zsh)"
 fi
 
-echo -e "{GREEN}PLEASE CHANGE YOUR PASSWORD NOW"
+echo -e "${GREEN}PLEASE CHANGE YOUR PASSWORD NOW ${NC}"
 passwd
 
 echo -e "${GREEN}✅ Done!! Rebooting system in 30 seconds... ${NC}"
