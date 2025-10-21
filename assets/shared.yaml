@@ -1,4 +1,5 @@
 pacpkg:
+  - azure-cli
   - bluez
   - bluez-utils
   - blueman
@@ -25,9 +26,15 @@ pacpkg:
   # - wezterm
   - wget
   - wireplumber
+  - wireguard-tools
   - wl-clipboard
   - zsh
 aurpkg:
   - powershell-bin
   - ripgrep
   - zen-browser-bin
+astrodeps:
+  - lazygit 
+  - tree-sitter-cli 
+  - fzf 
+  - fd

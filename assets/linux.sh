@@ -52,9 +52,10 @@ fi
 
 # stow dotfiles
 cd /tmp/dotfiles
-mv dotfiles ~/
-cd ~/dotfiles/
+mkdir ~/.dotfiles 
 rm ~/.zshrc
+cp linux/.* shared/.* ~/.dotfiles/
+cd ~/.dotfiles
 
 if [[ "$DESKTOP" == "hypr" ]]; then
   stow */ --ignore='cosmic'

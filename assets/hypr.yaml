@@ -6,8 +6,10 @@ pacpkg:
   - hyprland
   - hyprlock
   - hyprpaper
+  - hypridle
   - jq
   - ly
+  - pavucontrol
   - python
   - qt5-wayland
   - qt6-wayland
@@ -21,5 +23,6 @@ pacpkg:
   - waybar
   - wayland
   - xdg-desktop-portal-hyprland
+  - xdg-user-dirs
 aurpkg:
   - wlogout
