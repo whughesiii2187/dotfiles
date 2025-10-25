@@ -27,14 +27,10 @@ else
 fi
 
 # Install OhMyZSH
-echo -e "${GREEN}Installing OhMyZSH...${NC}"
-export RUNZSH=no
-export CHSH=no
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-# Install Powerlevel10k theme
-echo -e "${GREEN}Installing Powerlevel10k theme...${NC}"
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
+# echo -e "${GREEN}Installing OhMyZSH...${NC}"
+# export RUNZSH=no
+# export CHSH=no
+# sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Install Astronvim dependencies
 for pkg in "${astrodeps[@]}"; do
@@ -42,16 +38,8 @@ for pkg in "${astrodeps[@]}"; do
   sudo npm install "$pkg"
 done
 
-if [[ "$DESKTOP" == "hypr" ]]; then
-  # Hyprland Settings App
-  ml4w_app="com.ml4w.hyprlandsettings"
-  ml4w_app_repo="hyprland-settings"
-  echo ":: Installing $ml4w_app"
-  bash -c "$(curl -s https://raw.githubusercontent.com/mylinuxforwork/$ml4w_app_repo/master/setup.sh)"
-fi
-
 # stow dotfiles
-cd /tmp/dotfiles
+cd /tmp/dotfiles/dotfiles
 mkdir ~/.dotfiles 
 rm ~/.zshrc
 cp linux/.* shared/.* ~/.dotfiles/
@@ -77,7 +65,10 @@ else
   sudo systemctl enable cosmic-greeter.service
 fi
 
-## Anything else to do??
+#Install Qemu/KVM for virtual machines
+echo -e "${GREEN}Installing QEMU/KVM Virtual Machine packages... ${NC}"
+source $ASSETS_DIR/7-kvm.sh
+
 # Set Zsh as default shell
 if [[ "$SHELL" != "/bin/zsh" ]]; then
   echo -e "${GREEN}Setting Zsh as default shell...${NC}"

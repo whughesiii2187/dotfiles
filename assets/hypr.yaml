@@ -1,7 +1,9 @@
 pacpkg:
+  - bluetuith
   - brightnessctl
   - dunst
   - flatpak
+  - gazelle-tui
   - gum
   - hyprland
   - hyprlock
@@ -9,6 +11,7 @@ pacpkg:
   - hypridle
   - jq
   - ly
+  - nwg-displays
   - pavucontrol
   - python
   - qt5-wayland

@@ -54,17 +54,10 @@
     },
     "separate-outputs": true
   },
-  // ML4W Welcome App
-  "custom/ml4w-welcome": {
-    "on-click": "flatpak run com.ml4w.sidebar",
-    "format": " ",
-    "tooltip-format": "Open ML4W Sidebar App"
-  },
   // Empty
   "custom/empty": {
     "format": ""
   },
-  // Tools
   "custom/tools": {
     "format": "",
     "tooltip-format": "Tools"
@@ -76,17 +69,6 @@
     "on-click-right": "sleep 0.1 && ~/.config/ml4w/scripts/cliphist.sh d",
     "on-click-middle": "sleep 0.1 && ~/.config/ml4w/scripts/cliphist.sh w",
     "tooltip-format": "Left: Open clipboard Manager\nRight: Delete an entry\nMiddle: Clear list"
-  },
-  // Updates Count
-  "custom/updates": {
-    "format": "  {}",
-    "escape": true,
-    "return-type": "json",
-    "exec": "~/.config/ml4w/scripts/updates.sh",
-    "interval": 1800,
-    "signal": 1,
-    "hide-empty-text": true,
-    "on-click": "~/.config/ml4w/settings/installupdates.sh"
   },
   // Wallpaper
   "custom/wallpaper": {
@@ -203,7 +185,7 @@
   },
   // Clock
   "clock": {
-        "format": "{:%H:%M - %a}",
+        "format": "{:%A     %Y-%m-%d     %H:%M}",
     "on-click": "flatpak run com.ml4w.calendar",
     "timezone": "",
     "tooltip": false
@@ -215,24 +197,24 @@
   },
   // CPU
   "cpu": {
-    "format": "/ C {usage}% ",
+    "format": "C: {usage}% ",
     "on-click": "~/.config/ml4w/settings/system-monitor.sh"
   },
   // Memory
   "memory": {
-    "format": "/ M {}% ",
+    "format": "M: {}% ",
     "on-click": "~/.config/ml4w/settings/system-monitor.sh"
   },
   // Harddisc space used
   "disk": {
     "interval": 30,
-    "format": "D {percentage_used}% ",
+    "format": "D: {percentage_used}% ",
     "path": "/",
     "on-click": "~/.config/ml4w/settings/system-monitor.sh"
   },
-  "hyprland/language": {
-    "format": "/ K {short}"
-  },
+  // "hyprland/language": {
+  //   "format": "/ K {short}"
+  // },
   // Group Hardware
   "group/hardware": {
     "orientation": "inherit",
@@ -245,8 +227,8 @@
       "custom/system",
       "disk",
       "cpu",
-      "memory",
-      "hyprland/language"
+      "memory"
+      // "hyprland/language"
     ]
   },
   // Group Tools
@@ -263,14 +245,6 @@
       "custom/hypridle",
       "custom/hyprshade",
       "power-profiles-daemon"
-    ]
-  },
-  // Group Links
-  "group/links": {
-    "orientation": "horizontal",
-    "modules": [
-      "custom/chatgpt",
-      "custom/empty"
     ]
   },
   // Group Settings
@@ -311,10 +285,8 @@
     },
     "format": "{icon} {capacity}%",
     "format-charging": "  {capacity}%",
-    "format-plugged": "  {capacity}%",
+    "format-plugged": "",
     "format-alt": "{icon}  {time}",
-    // "format-good": "", // An empty format will hide the module
-    // "format-full": "",
     "format-icons": [
       " ",
       " ",
@@ -373,27 +345,5 @@
     "format": "{user}",
     "interval": 60,
     "icon": false
-  },
-  // backlight:
-  "backlight": {
-    "format": "{icon} {percent}%",
-    "format-icons": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
-    "scroll-step": 1
   }
 }

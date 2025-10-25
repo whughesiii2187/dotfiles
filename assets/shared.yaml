@@ -2,28 +2,29 @@ pacpkg:
   - azure-cli
   - bluez
   - bluez-utils
-  - blueman
+  - bluez-obex
   - btop
   - bottom
   - fastfetch
+  - fzf
   - gdu
   - kitty
   - libreoffice-fresh
   - neovim
   - networkmanager
-  - nwg-displays
   - npm
+  - ohmyposh
   - pipewire
   - pipewire-jack
   - pipewire-pulse
   - power-profiles-daemon
   - spotify-player
   - stow
+  - tmux
   - ttf-0xproto-nerd
   - unzip
   - vim
   - vlc
-  # - wezterm
   - wget
   - wireplumber
   - wireguard-tools

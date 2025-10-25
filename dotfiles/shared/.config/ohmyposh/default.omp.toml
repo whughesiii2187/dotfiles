@@ -1,4 +1,3 @@
-console_title_template = '{{if .Root}} ⚡ {{end}}{{.Folder | replace "~" "🏚" }} @ {{.HostName}}'
 version = 3
 
 [upgrade]
@@ -12,91 +11,76 @@ version = 3
   alignment = 'left'
 
   [[blocks.segments]]
-    template = '⚡ '
-    foreground = '#FFEB3B'
-    background = '#a313a8'
-    type = 'root'
-    style = 'plain'
-
-  [[blocks.segments]]
-    template = '{{ if .WSL }}WSL at {{ end }}{{.Icon}} '
-    foreground = '#ffffff'
-    background = 'transparent'
+    leading_diamond = ''
+    trailing_diamond = ''
+    template = ' {{ if .WSL }}WSL at {{ end }}{{.Icon}} '
+    foreground = '#000000'
+    background = '#ffffff'
     type = 'os'
-    style = 'plain'
-
-  [[blocks.segments]]
-    leading_diamond = '<transparent,#01579B></>'
-    trailing_diamond = ''
-    template = ' {{ .Path }} '
-    foreground = '#ffffff'
-    background = '#01579B'
-    type = 'path'
     style = 'diamond'
 
+  [[blocks.segments]]
+    template = '  '
+    foreground = '#000000'
+    powerline_symbol = ''
+    background = '#0000ff'
+    type = 'root'
+    style = 'powerline'
+
     [blocks.segments.properties]
-      folder_icon = '...'
-      folder_separator_icon = '<transparent>  </>'
-      home_icon = ''
-      style = 'agnoster_short'
+      style = 'full'
 
   [[blocks.segments]]
-    template = ' {{ .HEAD }}{{ if .Staging.Changed }}<#FF6F00>  {{ .Staging.String }}</>{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }} '
-    foreground = '#000000'
-    powerline_symbol = ''
-    background = '#00C853'
-    type = 'git'
+    template = ' {{ .Path }} '
+    foreground = '#ffffff'
+    powerline_symbol = ''
+    background = '#0000ff'
+    type = 'path'
     style = 'powerline'
-    background_templates = ['{{ if or (.Working.Changed) (.Staging.Changed) }}#FFEB3B{{ end }}', '{{ if and (gt .Ahead 0) (gt .Behind 0) }}#FFCC80{{ end }}', '{{ if gt .Ahead 0 }}#B388FF{{ end }}', '{{ if gt .Behind 0 }}#B388FF{{ end }}']
 
     [blocks.segments.properties]
-      fetch_status = true
+      style = 'full'
+
+  [[blocks.segments]]
+    template = ' {{ .HEAD }} '
+    foreground = '#000000'
+    powerline_symbol = ''
+    background = '#D4E157'
+    type = 'git'
+    style = 'powerline'
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'right'
+
+  [[blocks.segments]]
+    leading_diamond = ''
+    template = ' {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }} <transparent></>'
+    foreground = '#000000'
+    background = '#D4E157'
+    type = 'python'
+    style = 'diamond'
+
+  [[blocks.segments]]
+    leading_diamond = ''
+    template = ' {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} <transparent></>'
+    foreground = '#ffffff'
+    background = '#7FD5EA'
+    type = 'go'
+    style = 'diamond'
 
   # [[blocks.segments]]
-  #   leading_diamond = '<transparent,#49404f></>'
-  #   trailing_diamond = ''
-  #   template = ' {{ .FormattedMs }}s '
-  #   foreground = '#ffffff'
-  #   background = '#49404f'
-  #   type = 'executiontime'
+  #   leading_diamond = ''
+  #   trailing_diamond = ''
+  #   template = ' {{ .CurrentDate | date .Format }} '
+  #   foreground = '#000000'
+  #   background = '#ffffff'
+  #   type = 'time'
   #   style = 'diamond'
   #
   #   [blocks.segments.properties]
-  #     style = 'dallas'
-  #     threshold = 0.0
+  #     time_format = '15:04:05'
 
-  [[blocks.segments]]
-    template = '<transparent> </> {{ reason .Code }} '
-    foreground = '#ffffff'
-    powerline_symbol = ''
-    background = '#910000'
-    type = 'status'
-    style = 'powerline'
-
-# [[blocks]]
-#   type = 'prompt'
-#   alignment = 'right'
-#
-#   [[blocks.segments]]
-#     leading_diamond = ''
-#     trailing_diamond = ''
-#     template = '  {{ .UserName }}<transparent> / </>{{ .HostName }} '
-#     foreground = '#43CCEA'
-#     background = '#29315A'
-#     type = 'session'
-#     style = 'diamond'
-#
-#   [[blocks.segments]]
-#     leading_diamond = ''
-#     template = ' {{ .CurrentDate | date .Format }} '
-#     foreground = '#3EC669'
-#     background = '#29315A'
-#     type = 'time'
-#     style = 'diamond'
-#
-#     [blocks.segments.properties]
-#       time_format = '15:04:05'
-#
 [[blocks]]
   type = 'prompt'
   alignment = 'left'
@@ -104,10 +88,10 @@ version = 3
 
   [[blocks.segments]]
     template = '❯ '
-    foreground = '#ffffff'
+    foreground = '#D4E157'
     type = 'status'
     style = 'plain'
-    foreground_templates = ['{{ if gt .Code 0 }}#ff0000{{ end }}']
+    foreground_templates = ['{{ if gt .Code 0 }}#FF5252{{ end }}']
 
     [blocks.segments.properties]
       always_enabled = true
