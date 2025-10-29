@@ -2,7 +2,6 @@ pacpkg:
   - brightnessctl
   - dunst
   - flatpak
-  - gazelle-tui
   - gum
   - hyprland
   - hyprlock
@@ -28,4 +27,5 @@ pacpkg:
   - xdg-user-dirs
 aurpkg:
   - bluetuith
+  - gazelle-tui
   - wlogout
