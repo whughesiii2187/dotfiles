@@ -20,17 +20,11 @@ URL="https://aur.archlinux.org"
 STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
 if [ "$STATUS" -eq 200 ]; then
   echo -e "${GREEN}AUR is up. Installing yay from aur.archlinux.org...${NC}"
-  source $ASSETS_DIR/yay.sh
+  source "$ASSETS_DIR"/yay.sh
 else
   echo -e "${GREEN}aur.archlinux.org is DOWN. Falling back to GitHub AUR mirror...${NC}"
-  source $ASSETS_DIR/yay-down.sh
+  source "$ASSETS_DIR"/yay-down.sh
 fi
-
-# Install OhMyZSH
-# echo -e "${GREEN}Installing OhMyZSH...${NC}"
-# export RUNZSH=no
-# export CHSH=no
-# sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Install Astronvim dependencies
 for pkg in "${astrodeps[@]}"; do
@@ -38,17 +32,22 @@ for pkg in "${astrodeps[@]}"; do
   sudo npm install "$pkg"
 done
 
+if [ ! -f ~/.zshrc ]; then
+  echo -e "${GREEN}.zshrc file not found, not deleting ${NC}"
+else
+  rm ~/.zshrc
+fi
+
 # stow dotfiles
 cd /tmp/dotfiles/dotfiles
 mkdir ~/.dotfiles 
-rm ~/.zshrc
-cp linux/.* shared/.* ~/.dotfiles/
+cp -r linux/.* shared/.* ~/.dotfiles/
 cd ~/.dotfiles
 
 if [[ "$DESKTOP" == "hypr" ]]; then
-  stow */ --ignore='cosmic'
+  stow . --ignore='cosmic'
 else
-  stow */
+  stow .
 fi
 
 # Enable services
@@ -67,7 +66,7 @@ fi
 
 #Install Qemu/KVM for virtual machines
 echo -e "${GREEN}Installing QEMU/KVM Virtual Machine packages... ${NC}"
-source $ASSETS_DIR/7-kvm.sh
+source "$ASSETS_DIR"/7-kvm.sh
 
 # Set Zsh as default shell
 if [[ "$SHELL" != "/bin/zsh" ]]; then
