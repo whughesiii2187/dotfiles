@@ -1,5 +1,4 @@
 pacpkg:
-  - bluetuith
   - brightnessctl
   - dunst
   - flatpak
@@ -28,4 +27,5 @@ pacpkg:
   - xdg-desktop-portal-hyprland
   - xdg-user-dirs
 aurpkg:
+  - bluetuith
   - wlogout
