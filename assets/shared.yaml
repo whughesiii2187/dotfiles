@@ -13,7 +13,6 @@ pacpkg:
   - neovim
   - networkmanager
   - npm
-  - ohmyposh
   - pipewire
   - pipewire-jack
   - pipewire-pulse
@@ -31,7 +30,8 @@ pacpkg:
   - wl-clipboard
   - zsh
 aurpkg:
-  - devpod
+  - devpod-bin
+  - oh-my-posh
   - powershell-bin
   - ripgrep
   - zen-browser-bin

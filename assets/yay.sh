@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if ! command -v yay &> /dev/null; then
+if ! command -v yay; then
   cd /tmp
   git clone https://aur.archlinux.org/yay-bin.git
   cd yay-bin
