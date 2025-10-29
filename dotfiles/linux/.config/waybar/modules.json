@@ -65,9 +65,9 @@
   // Cliphist
   "custom/cliphist": {
     "format": "",
-    "on-click": "sleep 0.1 && ~/.config/ml4w/scripts/cliphist.sh",
-    "on-click-right": "sleep 0.1 && ~/.config/ml4w/scripts/cliphist.sh d",
-    "on-click-middle": "sleep 0.1 && ~/.config/ml4w/scripts/cliphist.sh w",
+    "on-click": "sleep 0.1 && ~/.config/hypr/scripts/cliphist.sh",
+    "on-click-right": "sleep 0.1 && ~/.config/hypr/scripts/cliphist.sh d",
+    "on-click-middle": "sleep 0.1 && ~/.config/hypr/scripts/cliphist.sh w",
     "tooltip-format": "Left: Open clipboard Manager\nRight: Delete an entry\nMiddle: Clear list"
   },
   // Wallpaper
@@ -104,10 +104,11 @@
   // Windows VM
   "custom/windowsvm": {
     "format": "",
-    "on-click": "~/.config/ml4w/scripts/launchvm.sh",
-    "tooltip": false
+    "on-click": "kitty $HOME/.config/hypr/scripts/launchvm.sh install",
+    "on-click-right": "kitty $HOME/.config/hypr/scripts/launchvm.sh remove",
+    "tooltip-format": "Left: Launch Win11 VM\nRight: Remove Win11 VM"
   },
-  // Rofi Application Launcher
+  // Application Launcher
   "custom/appmenu": {
     // START APPS LABEL
     "format": "Apps",
@@ -116,17 +117,10 @@
     "on-click-right": "~/.config/hypr/scripts/keybindings.sh",
     "tooltip-format": "Left: Open the application launcher\nRight: Show all keybindings"
   },
-  // Rofi Application Launcher
-  "custom/appmenuicon": {
-    "format": "",
-    "on-click": "sleep 0.2;rofi -show drun -replace",
-    "on-click-right": "~/.config/hypr/scripts/keybindings.sh",
-    "tooltip-format": "Left: Open the application launcher\nRight: Show all keybindings"
-  },
   // Power Menu
   "custom/exit": {
     "format": "",
-    "on-click": "~/.config/ml4w/scripts/wlogout.sh",
+    "on-click": "~/.config/hypr/scripts/wlogout.sh",
     "on-click-right": "hyprlock",
     "tooltip-format": "Left: Power menu\nRight: Lock screen"
   },
@@ -198,23 +192,20 @@
   // CPU
   "cpu": {
     "format": "C: {usage}% ",
-    "on-click": "~/.config/ml4w/settings/system-monitor.sh"
+    "on-click": "~/.config/hypr/settings/system-monitor.sh"
   },
   // Memory
   "memory": {
     "format": "M: {}% ",
-    "on-click": "~/.config/ml4w/settings/system-monitor.sh"
+    "on-click": "~/.config/hypr/settings/system-monitor.sh"
   },
   // Harddisc space used
   "disk": {
     "interval": 30,
     "format": "D: {percentage_used}% ",
     "path": "/",
-    "on-click": "~/.config/ml4w/settings/system-monitor.sh"
+    "on-click": "~/.config/hypr/settings/system-monitor.sh"
   },
-  // "hyprland/language": {
-  //   "format": "/ K {short}"
-  // },
   // Group Hardware
   "group/hardware": {
     "orientation": "inherit",
@@ -228,7 +219,6 @@
       "disk",
       "cpu",
       "memory"
-      // "hyprland/language"
     ]
   },
   // Group Tools
@@ -272,8 +262,8 @@
     "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
     "tooltip-format-disconnected": "Disconnected",
     "max-length": 50,
-    "on-click": "~/.config/ml4w/settings/networkmanager.sh",
-    "on-click-right": "~/.config/ml4w/scripts/nm-applet.sh toggle",
+    "on-click": "~/.config/hypr/settings/networkmanager.sh",
+    "on-click-right": "~/.config/hypr/scripts/nm-applet.sh toggle",
   },
   // Battery
   "battery": {
@@ -308,37 +298,29 @@
     }
   },
   // Pulseaudio
-  "pulseaudio": {
+  "wireplumber": {
     "scroll-step": 5, // %, can be a float
     "format": "{icon}  {volume}%",
-    "format-bluetooth": "{volume}% {icon} {format_source}",
-    "format-bluetooth-muted": " {icon} {format_source}",
     "format-muted": " {format_source}",
-    "format-source": "{volume}% ",
     "format-source-muted": "",
     "format-icons": {
-      "headphone": " ",
-      "hands-free": " ",
-      "headset": " ",
-      "phone": " ",
-      "portable": " ",
-      "car": " ",
       "default": [
         "",
         "",
         ""
       ]
     },
-    "on-click": "pavucontrol"
+    "on-click": "kitty -e wiremix"
   },
   // Bluetooth
   "bluetooth": {
-    "format": " {status}",
-    "format-disabled": "",
-    "format-off": "",
     "interval": 30,
-    "on-click": "sleep 0.1 && ~/.config/ml4w/settings/bluetooth.sh",
-    "format-no-controller": ""
+    "on-click": "sleep 0.1 && ~/.config/hypr/settings/bluetooth.sh",
+    "format-no-controller": "",
+    "format-on": "󰂯",
+    "format-off": "󰂲",
+    "format-disabled": "", // an empty format will hide the module
+    "format-connected": "󰂱"
   },
   // Other
   "user": {

@@ -9,13 +9,14 @@
 # -----------------------------------------------------
 # Get keybindings location based on variation
 # -----------------------------------------------------
+# config_file=$(<~/.config/hypr/conf/binds.conf)
 config_file=$(<~/.config/hypr/conf/keybinding.conf)
 config_file=${config_file//source = ~//home/$USER}
 
 # -----------------------------------------------------
 # Load Launcher
 # -----------------------------------------------------
-launcher=$(cat $HOME/.config/ml4w/settings/launcher)
+launcher=$(cat $HOME/.config/hypr/settings/launcher)
 
 # -----------------------------------------------------
 # Path to keybindings config file
@@ -40,7 +41,6 @@ keybinds=$(awk -F'[=#]' '
 ' "$config_file")
 
 sleep 0.2
-
 if [ "$launcher" == "walker" ]; then
     keybinds=$(echo -n "$keybinds" | tr '\r' ':')
     $HOME/.config/walker/launch.sh -d -N -H -p "Search Keybinds" <<<"$keybinds"

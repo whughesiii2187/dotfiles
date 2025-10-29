@@ -26,4 +26,3 @@ if [[ "$(uname)" == 'Darwin' ]]; then
   alias acr="az login && az acr login -n r1k8sacrdev"
 fi
 
-test -z "$TMUX" && (tmux attach || tmux)

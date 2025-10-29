@@ -5,6 +5,7 @@ pacpkg:
   - bluez-obex
   - btop
   - bottom
+  - devpod
   - fastfetch
   - fzf
   - gdu

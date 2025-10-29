@@ -9,7 +9,7 @@
 ml4w_cache_folder="$HOME/.cache/ml4w/hyprland-dotfiles"
 gamemode_monitor="$HOME/.config/hypr/conf/monitors/gamemode.conf"
 
-if [ -f $HOME/.config/ml4w/settings/gamemode-enabled ]; then
+if [ -f $HOME/.config/hypr/settings/gamemode-enabled ]; then
   if [ -f $ml4w_cache_folder/last_monitor.conf ]; then
     cat $ml4w_cache_folder/last_monitor.conf > $HOME/.config/hypr/conf/monitor.conf
     rm $ml4w_cache_folder/last_monitor.conf
@@ -19,7 +19,7 @@ if [ -f $HOME/.config/ml4w/settings/gamemode-enabled ]; then
     $HOME/.config/hypr/scripts/wallpaper-automation.sh &
   fi
   hyprctl reload
-  rm $HOME/.config/ml4w/settings/gamemode-enabled
+  rm $HOME/.config/hypr/settings/gamemode-enabled
   notify-send "Gamemode deactivated" "Animations and blur enabled"
 else
   if [ -f $gamemode_monitor ]; then
@@ -38,6 +38,6 @@ else
     keyword general:gaps_out 0;\
     keyword general:border_size 1;\
     keyword decoration:rounding 0"
-  touch $HOME/.config/ml4w/settings/gamemode-enabled
+  touch $HOME/.config/hypr/settings/gamemode-enabled
   notify-send "Gamemode activated" "Animations and blur disabled"
 fi
