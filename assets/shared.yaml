@@ -5,7 +5,6 @@ pacpkg:
   - bluez-obex
   - btop
   - bottom
-  - devpod
   - fastfetch
   - fzf
   - gdu
@@ -32,6 +31,7 @@ pacpkg:
   - wl-clipboard
   - zsh
 aurpkg:
+  - devpod
   - powershell-bin
   - ripgrep
   - zen-browser-bin
