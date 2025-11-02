@@ -65,8 +65,8 @@ else
 fi
 
 #Install Qemu/KVM for virtual machines
-echo -e "${GREEN}Installing QEMU/KVM Virtual Machine packages... ${NC}"
-source "$ASSETS_DIR"/7-kvm.sh
+# echo -e "${GREEN}Installing QEMU/KVM Virtual Machine packages... ${NC}"
+# source "$ASSETS_DIR"/7-kvm.sh
 
 # Set Zsh as default shell
 if [[ "$SHELL" != "/bin/zsh" ]]; then
