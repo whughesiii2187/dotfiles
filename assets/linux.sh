@@ -27,10 +27,10 @@ else
 fi
 
 # Install Astronvim dependencies
-for pkg in "${astrodeps[@]}"; do
-  echo -e "${GREEN} Installing Astronvim dependencies $pkg...${NC}"
-  sudo npm install "$pkg"
-done
+# for pkg in "${astrodeps[@]}"; do
+#   echo -e "${GREEN} Installing Astronvim dependencies $pkg...${NC}"
+#   sudo npm install "$pkg"
+# done
 
 if [ ! -f ~/.zshrc ]; then
   echo -e "${GREEN}.zshrc file not found, not deleting ${NC}"
@@ -41,11 +41,12 @@ fi
 # stow dotfiles
 cd /tmp/dotfiles/dotfiles
 mkdir ~/.dotfiles 
-cp -r linux/.* shared/.* ~/.dotfiles/
+cp -r shared/.* ~/.dotfiles/
 cd ~/.dotfiles
 
 if [[ "$DESKTOP" == "hypr" ]]; then
-  stow . --ignore='cosmic'
+  cp -r linux/.* ~/.dotfiles/
+  stow .
 else
   stow .
 fi

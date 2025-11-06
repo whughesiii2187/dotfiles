@@ -1,11 +1,4 @@
 #!/usr/bin/env bash
-#                    __
-#  _    _____ ___ __/ /  ___ _____
-# | |/|/ / _ `/ // / _ \/ _ `/ __/
-# |__,__/\_,_/\_, /_.__/\_,_/_/
-#            /___/
-#
-
 # -----------------------------------------------------
 # Prevent duplicate launches: only the first parallel
 # invocation proceeds; all others exit immediately.
@@ -23,52 +16,16 @@ pkill waybar || true
 sleep 0.5
 
 # -----------------------------------------------------
-# Default theme: /THEMEFOLDER;/VARIATION
-# -----------------------------------------------------
-
-# default_theme="/ml4w-minimal;/ml4w-modern/default"
-default_theme="/ml4w-minimal;/ml4w-minimal"
-
-
-# -----------------------------------------------------
-# Get current theme information from ~/.config/hypr/settings/waybar-theme.sh
-# -----------------------------------------------------
-
-# if [ -f ~/.config/hypr/settings/waybar-theme.sh ]; then
-#     themestyle=$(cat ~/.config/hypr/settings/waybar-theme.sh)
-# else
-#     touch ~/.config/hypr/settings/waybar-theme.sh
-#     echo "$default_theme" >~/.config/hypr/settings/waybar-theme.sh
-    themestyle=$default_theme
-# fi
-
-IFS=';' read -ra arrThemes <<<"$themestyle"
-echo ":: Theme: ${arrThemes[0]}"
-
-# if [ ! -f ~/.config/waybar/themes${arrThemes[1]}/style.css ]; then
-#     themestyle=$default_theme
-# fi
-
-# -----------------------------------------------------
 # Loading the configuration
 # -----------------------------------------------------
 
 config_file="config"
 style_file="style.css"
 
-# Standard files can be overwritten with an existing config-custom or style-custom.css
-# if [ -f ~/.config/waybar/themes${arrThemes[0]}/config-custom ]; then
-#     config_file="config-custom"
-# fi
-# if [ -f ~/.config/waybar/themes${arrThemes[1]}/style-custom.css ]; then
-#     style_file="style-custom.css"
-# fi
-
 # Check if waybar-disabled file exists
 if [ ! -f $HOME/.config/hypr/settings/waybar-disabled ]; then
     HYPRLAND_SIGNATURE=$(hyprctl instances -j | jq -r '.[0].instance')
-    HYPRLAND_INSTANCE_SIGNATURE="$HYPRLAND_SIGNATURE" waybar -c ~/.config/waybar/themes${arrThemes[0]}/$config_file -s ~/.config/waybar/themes${arrThemes[1]}/$style_file &
-    # env GTK_DEBUG=interactive waybar -c ~/.config/waybar/themes${arrThemes[0]}/$config_file -s ~/.config/waybar/themes${arrThemes[1]}/$style_file &
+    HYPRLAND_INSTANCE_SIGNATURE="$HYPRLAND_SIGNATURE" waybar -c ~/.config/waybar/$config_file -s ~/.config/waybar/$style_file &
 else
     echo ":: Waybar disabled"
 fi
