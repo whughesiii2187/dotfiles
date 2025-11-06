@@ -1,0 +1,4 @@
+{
+  "ef-themes.nvim": { "branch": "main", "commit": "5deb08237d1e243532dfdb5b24c3658c31d255aa" },
+  "lazy.nvim": { "branch": "main", "commit": "e6a8824858757ca9cd4f5ae1a72d845fa5c46a39" }
+}
