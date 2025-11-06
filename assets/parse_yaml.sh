@@ -8,6 +8,7 @@ parse_yaml() {
   # Declare globals if you expect specific arrays
   pacpkg=()
   aurpkg=()
+  nvim=()
   brewpkg=()
   brewcask=()
 
@@ -32,6 +33,9 @@ parse_yaml() {
         ;;
       aurpkg)
         aurpkg+=("$item")
+        ;;
+      nvim)
+        nvim+=("$item")
         ;;
       brewpkg)
         brewpkg+=("$item")

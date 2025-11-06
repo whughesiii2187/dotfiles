@@ -6,18 +6,15 @@ set -euo pipefail
 # ────────────────────────────────
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ASSETS_DIR="${SCRIPT_DIR}/assets"
-
 PARSER_FILE="${ASSETS_DIR}/parse_yaml.sh"
 SHARED_FILE="${ASSETS_DIR}/shared.yaml"
-HYPR_FILE="${ASSETS_DIR}/hypr.yaml"
-COSMIC_FILE="${ASSETS_DIR}/cosmic.yaml"
 SETUP_SCRIPT="${ASSETS_DIR}/linux.sh"
 
 # ────────────────────────────────
 # Require arguments
 # ────────────────────────────────
 if [[ $# -lt 2 ]]; then
-  echo "Usage: $0 (--dry-run|--no-dry-run) (hypr|cosmic)"
+  echo "Usage: $0 (--dry-run|--no-dry-run) (hypr|ml4w)"
   exit 1
 fi
 
@@ -31,9 +28,9 @@ case "$1" in
 esac
 
 case "$2" in
-  hypr|cosmic) DESKTOP="$2" ;;
+  hypr|ml4w) DESKTOP="$2" ;;
   *)
-    echo "Error: Second argument must be 'hypr' or 'cosmic'"
+    echo "Error: Second argument must be 'hypr' or 'ml4w'"
     exit 1
     ;;
 esac
@@ -45,11 +42,6 @@ for file in "$PARSER_FILE" "$SHARED_FILE" "$SETUP_SCRIPT"; do
   [[ -f "$file" ]] || { echo "Error: Missing required file: $file"; exit 1; }
 done
 
-if [[ "$DESKTOP" == "hypr" ]]; then
-  [[ -f "$HYPR_FILE" ]] || { echo "Error: Missing $HYPR_FILE"; exit 1; }
-else
-  [[ -f "$COSMIC_FILE" ]] || { echo "Error: Missing $COSMIC_FILE"; exit 1; }
-fi
 
 # ────────────────────────────────
 # Import parser
@@ -62,23 +54,17 @@ source "$PARSER_FILE"
 parse_yaml "$SHARED_FILE"
 shared_pacpkg=("${pacpkg[@]}")
 shared_aurpkg=("${aurpkg[@]}")
+shared_nvim=("${nvim[@]}")
 
 # Reset arrays
 pacpkg=()
 aurpkg=()
-
-if [[ "$DESKTOP" == "hypr" ]]; then
-  parse_yaml "$HYPR_FILE"
-else
-  parse_yaml "$COSMIC_FILE"
-fi
-
-desktop_pacpkg=("${pacpkg[@]}")
-desktop_aurpkg=("${aurpkg[@]}")
+nvim=()
 
 # Merge & deduplicate
-pacpkg=($(printf "%s\n" "${shared_pacpkg[@]}" "${desktop_pacpkg[@]}" | sort -u))
-aurpkg=($(printf "%s\n" "${shared_aurpkg[@]}" "${desktop_aurpkg[@]}" | sort -u))
+pacpkg=($(printf "%s\n" "${shared_pacpkg[@]}" | sort -u))
+aurpkg=($(printf "%s\n" "${shared_aurpkg[@]}" | sort -u))
+nvim=($(printf "%s\n" "${shared_nvim[@]}" | sort -u ))
 
 # ────────────────────────────────
 # Network check
@@ -104,6 +90,9 @@ printf '  %s\n' "${pacpkg[@]}"
 echo
 echo -e "${GREEN}✨ AUR packages:${NC}"
 printf '  %s\n' "${aurpkg[@]}"
+echo
+echo -e "${GREEN}✨ NVIM dependencies:${NC}"
+printf '  %s\n' "${nvim[@]}"
 echo
 
 # ────────────────────────────────

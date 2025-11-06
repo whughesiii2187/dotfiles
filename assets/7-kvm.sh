@@ -1,14 +1,4 @@
 #!/bin/bash
-#  _  ____     ____  __  
-# | |/ /\ \   / /  \/  | 
-# | ' /  \ \ / /| |\/| | 
-# | . \   \ V / | |  | | 
-# |_|\_\   \_/  |_|  |_| 
-#                        
-#  
-# by Stephan Raabe (2023) 
-# ----------------------------------------------------- 
-
 # ------------------------------------------------------
 # Install Script for Libvirt
 # ------------------------------------------------------
@@ -24,6 +14,7 @@ sudo pacman -S virt-manager virt-viewer qemu vde2 ebtables iptables-nft nftables
 # ------------------------------------------------------
 # Edit libvirtd.conf
 # ------------------------------------------------------
+# TODO: Use sed to remove the #
 echo "Manual steps required:"
 echo "Open sudo vim /etc/libvirt/libvirtd.conf:"
 echo 'Remove # at the following lines: unix_sock_group = "libvirt" and unix_sock_rw_perms = "0770"'
@@ -46,6 +37,7 @@ sudo systemctl start libvirtd
 # ------------------------------------------------------
 # Edit qemu.conf
 # ------------------------------------------------------
+# TODO: Investigate using the defaults and adding users to the qemu group
 echo "Manual steps required:"
 echo "Open sudo vim /etc/libvirt/qemu.conf"
 echo "Uncomment and add your user name to user and group."

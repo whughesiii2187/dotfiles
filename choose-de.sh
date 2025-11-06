@@ -29,9 +29,9 @@ done
 # ────────────────────────────────
 echo
 echo "Which desktop environment do you want to install?"
-select desktop_choice in "hypr" "cosmic"; do
+select desktop_choice in "hypr" "ml4w"; do
   case "$desktop_choice" in
-    hypr|cosmic)
+    hypr|ml4w)
       DESKTOP="$desktop_choice"
       break
       ;;

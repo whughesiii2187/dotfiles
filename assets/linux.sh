@@ -4,14 +4,16 @@ set -euo pipefail
 echo -e "${GREEN}Updating system...${NC}"
 sudo pacman -Syu --noconfirm
 
-echo -e "${GREEN}Installing official repo packages...${NC}"
-for pkg in "${pacpkg[@]}"; do
-  if $DRY_RUN; then
-    echo "Installing (pacman): $pkg"
-  else
-    sudo pacman -S --noconfirm --needed "$pkg"
-  fi
-done
+if [[ "$DESKTOP" == "hypr" ]]; then
+  echo -e "${GREEN}Installing official repo packages...${NC}"
+  for pkg in "${pacpkg[@]}"; do
+    if $DRY_RUN; then
+      echo "Installing (pacman): $pkg"
+    else
+      sudo pacman -S --noconfirm --needed "$pkg"
+    fi
+  done
+fi
 
 # Install yay (AUR helper)
 # Check if aur.archlinux.org is up
@@ -27,10 +29,10 @@ else
 fi
 
 # Install Astronvim dependencies
-# for pkg in "${astrodeps[@]}"; do
-#   echo -e "${GREEN} Installing Astronvim dependencies $pkg...${NC}"
-#   sudo npm install "$pkg"
-# done
+for pkg in "${nvim[@]}"; do
+  echo -e "${GREEN} Installing Astronvim dependencies $pkg...${NC}"
+  sudo npm install "$pkg"
+done
 
 if [ ! -f ~/.zshrc ]; then
   echo -e "${GREEN}.zshrc file not found, not deleting ${NC}"
@@ -53,17 +55,12 @@ fi
 
 # Enable services
 echo -e "${GREEN}Enabling services...${NC}"
+sudo systemctl enable ly
 sudo systemctl enable bluetooth.service
 sudo systemctl enable power-profiles-daemon.service
 sudo systemctl enable NetworkManager.service
 sudo systemctl stop systemd-networkd && sudo systemctl disable systemd-networkd
 systemctl --user enable pipewire.socket pipewire-pulse.socket wireplumber.service pipewire.service 2>/dev/null || true
-
-if [[ "$DESKTOP" == "hypr" ]]; then
-  sudo systemctl enable ly
-else
-  sudo systemctl enable cosmic-greeter.service
-fi
 
 #Install Qemu/KVM for virtual machines
 # echo -e "${GREEN}Installing QEMU/KVM Virtual Machine packages... ${NC}"
@@ -75,8 +72,8 @@ if [[ "$SHELL" != "/bin/zsh" ]]; then
   chsh -s "$(which zsh)"
 fi
 
-echo -e "${GREEN}PLEASE CHANGE YOUR PASSWORD NOW ${NC}"
-passwd
+# echo -e "${GREEN}PLEASE CHANGE YOUR PASSWORD NOW ${NC}"
+# passwd
 
 echo -e "${GREEN}✅ Done!! Rebooting system in 30 seconds... ${NC}"
 sleep 30s

@@ -29,13 +29,44 @@ pacpkg:
   - wireguard-tools
   - wl-clipboard
   - zsh
+  - brightnessctl
+  - dunst
+  - flatpak
+  - gum
+  - hyprland
+  - hyprlock
+  - hyprpaper
+  - hypridle
+  - jq
+  - ly
+  - nwg-displays
+  - python
+  - qt5-wayland
+  - qt6-wayland
+  - rofi-wayland
+  - thunar
+  - ttf-fira-code
+  - ttf-fira-sans
+  - ttf-firacode-nerd
+  - otf-font-awesome
+  - udiskie
+  - ufw
+  - usbutils
+  - waybar
+  - wayland
+  - wiremix
+  - xdg-desktop-portal-hyprland
+  - xdg-user-dirs
 aurpkg:
   - devpod-bin
   - oh-my-posh
   - powershell-bin
   - ripgrep
   - zen-browser-bin
-astrodeps:
+  - bluetuith
+  - gazelle-tui
+  - wlogout
+nvim:
   - lazygit 
   - tree-sitter-cli 
   - fzf 
