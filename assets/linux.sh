@@ -55,16 +55,24 @@ fi
 
 # Enable services
 echo -e "${GREEN}Enabling services...${NC}"
-sudo systemctl enable ly
+sudo systemctl enable greetd
 sudo systemctl enable bluetooth.service
 sudo systemctl enable power-profiles-daemon.service
 sudo systemctl enable NetworkManager.service
 sudo systemctl stop systemd-networkd && sudo systemctl disable systemd-networkd
+sudo systemctl stop wpa_supplicant && sudo systemctl disable wpa_supplicant
 systemctl --user enable pipewire.socket pipewire-pulse.socket wireplumber.service pipewire.service 2>/dev/null || true
 
-#Install Qemu/KVM for virtual machines
-# echo -e "${GREEN}Installing QEMU/KVM Virtual Machine packages... ${NC}"
-# source "$ASSETS_DIR"/7-kvm.sh
+# Setup Plymouth, snapper snapshots, 
+sudo sed -i 's/\(HOOKS=(.*udev\)/\1 plymouth/' /etc/mkinitcpio.conf
+sudo mkinitcpio -P
+sudo plymouth-set-default-theme optimus -R
+
+sudo sed -i 's/^TIMELINE_CREATE="yes"/TIMELINE_CREATE="no"/' /etc/snapper/configs/{root,home}
+sudo sed -i 's/^NUMBER_LIMIT="50"/NUMBER_LIMIT="5"/' /etc/snapper/configs/{root,home}
+sudo sed -i 's/^NUMBER_LIMIT_IMPORTANT="10"/NUMBER_LIMIT_IMPORTANT="5"/' /etc/snapper/configs/{root,home}
+
+
 
 # Set Zsh as default shell
 if [[ "$SHELL" != "/bin/zsh" ]]; then

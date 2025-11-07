@@ -5,6 +5,7 @@ pacpkg:
   - bluez-obex
   - btop
   - bottom
+  - btrfs-progs
   - fastfetch
   - fzf
   - gdu
@@ -57,6 +58,7 @@ pacpkg:
   - wiremix
   - xdg-desktop-portal-hyprland
   - xdg-user-dirs
+  - snap-pac
 aurpkg:
   - devpod-bin
   - oh-my-posh
@@ -66,6 +68,11 @@ aurpkg:
   - bluetuith
   - gazelle-tui
   - wlogout
+  - waypaper
+  - limine-snapper-sync
+  - limine-update
+  - limine-mkinitcpio-hook
+  - plymouth-theme-Optimus-git
 nvim:
   - lazygit 
   - tree-sitter-cli 
