@@ -20,7 +20,13 @@ nmap('[p', '<Cmd>exe "put! " . v:register<CR>', 'Paste Above')
 nmap(']p', '<Cmd>exe "put "  . v:register<CR>', 'Paste Below')
 
 -- Many general mappings are created by 'mini.basics'. See 'plugin/30_mini.lua'
-
+--
+-- added by me
+--
+vim.keymap.set('n', '<leader>/', 'gcc', { remap = true, desc = 'Toggle comment line', silent = true })
+vim.keymap.set('v', '<leader>/', 'gc', { remap = true, desc = 'Toggle comment block', silent = true })
+--- Done by me --
+---
 -- stylua: ignore start
 -- The next part (until `-- stylua: ignore end`) is aligned manually for easier
 -- reading. Consider preserving this or remove `-- stylua` lines to autoformat.
@@ -60,7 +66,6 @@ _G.Config.leader_group_clues = {
   { mode = 'n', keys = '<Leader>s', desc = '+Session' },
   { mode = 'n', keys = '<Leader>t', desc = '+Terminal' },
   { mode = 'n', keys = '<Leader>v', desc = '+Visits' },
-
   { mode = 'x', keys = '<Leader>g', desc = '+Git' },
   { mode = 'x', keys = '<Leader>l', desc = '+Language' },
 }
@@ -85,13 +90,17 @@ local new_scratch_buffer = function()
   vim.api.nvim_win_set_buf(0, vim.api.nvim_create_buf(true, true))
 end
 
+nmap_leader('Q', ':qa<CR>', 'Close NeoVim')
+
 nmap_leader('ba', '<Cmd>b#<CR>',                                 'Alternate')
 nmap_leader('bd', '<Cmd>lua MiniBufremove.delete()<CR>',         'Delete')
 nmap_leader('bD', '<Cmd>lua MiniBufremove.delete(0, true)<CR>',  'Delete!')
 nmap_leader('bs', new_scratch_buffer,                            'Scratch')
-nmap_leader('bw', '<Cmd>lua MiniBufremove.wipeout()<CR>',        'Wipeout')
-nmap_leader('bW', '<Cmd>lua MiniBufremove.wipeout(0, true)<CR>', 'Wipeout!')
-
+-- nmap_leader('bWW', '<Cmd>lua MiniBufremove.wipeout()<CR>',        'Wipeout')
+-- nmap_leader('bWWW', '<Cmd>lua MiniBufremove.wipeout(0, true)<CR>', 'Wipeout!')
+--- My added keymaps --
+nmap_leader('bw', ':w<CR>', 'Save file')
+nmap_leader('bq', ':bd<CR>', 'Close file')
 -- e is for 'Explore' and 'Edit'. Common usage:
 -- - `<Leader>ed` - open explorer at current working directory
 -- - `<Leader>ef` - open directory of current file (needs to be present on disk)
@@ -179,7 +188,7 @@ xmap_leader('gs', '<Cmd>lua MiniGit.show_at_cursor()<CR>', 'Show at selection')
 -- - `<Leader>lr` - perform rename via LSP
 -- - `<Leader>ls` - navigate to source definition of symbol under cursor
 --
--- NOTE: most LSP mappings represent a more structured way of replacing built-in
+-- most LSP mappings represent a more structured way of replacing built-in
 -- LSP mappings (like `:h gra` and others). This is needed because `gr` is mapped
 -- by an "replace" operator in 'mini.operators' (which is more commonly used).
 local formatting_cmd = '<Cmd>lua require("conform").format({lsp_fallback=true})<CR>'

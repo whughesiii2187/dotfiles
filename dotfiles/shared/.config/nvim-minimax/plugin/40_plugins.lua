@@ -12,6 +12,23 @@
 local add, later = MiniDeps.add, MiniDeps.later
 local now_if_args = _G.Config.now_if_args
 
+
+now_if_args(function()
+add({
+  source = "christoomey/vim-tmux-navigator"
+})  
+end)
+now_if_args(function()
+  add(
+    {
+      source = "oonamo/ef-themes.nvim"
+    }
+  )
+    require("ef-themes").setup({ 
+      transparent = true 
+    })
+    vim.cmd("colorscheme ef-deuteranopia-dark")
+end)
 -- Tree-sitter ================================================================
 
 -- Tree-sitter is a tool for fast incremental parsing. It converts text into

@@ -17,11 +17,10 @@ eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/default.omp.toml)"
 
 alias vi="nvim"
 alias v="nvim"
-alias vim="nvim"
+alias gg="lazygit"
 alias getmyip="dig -4 TXT +short o-o.myaddr.l.google.com @ns1.google.com"
 alias python="python3"
 alias devc="devpod up . && devpod ssh . --command "zsh""
-alias kick="NVIM_APPNAME=kick nvim"
 alias mini="NVIM_APPNAME=nvim-minimax nvim"
 alias beer="NVIM_APPNAME=beervim nvim"
 

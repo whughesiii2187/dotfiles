@@ -59,6 +59,7 @@ pacpkg:
   - xdg-desktop-portal-hyprland
   - xdg-user-dirs
   - snap-pac
+  - lazygit
 aurpkg:
   - devpod-bin
   - oh-my-posh
@@ -73,8 +74,5 @@ aurpkg:
   - limine-update
   - limine-mkinitcpio-hook
   - plymouth-theme-Optimus-git
-nvim:
-  - lazygit 
-  - tree-sitter-cli 
-  - fzf 
+  # - tree-sitter-cli 
   - fd
