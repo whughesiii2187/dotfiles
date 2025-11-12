@@ -54,17 +54,14 @@ source "$PARSER_FILE"
 parse_yaml "$SHARED_FILE"
 shared_pacpkg=("${pacpkg[@]}")
 shared_aurpkg=("${aurpkg[@]}")
-shared_nvim=("${nvim[@]}")
 
 # Reset arrays
 pacpkg=()
 aurpkg=()
-nvim=()
 
 # Merge & deduplicate
 pacpkg=($(printf "%s\n" "${shared_pacpkg[@]}" | sort -u))
 aurpkg=($(printf "%s\n" "${shared_aurpkg[@]}" | sort -u))
-nvim=($(printf "%s\n" "${shared_nvim[@]}" | sort -u ))
 
 # ────────────────────────────────
 # Network check
@@ -90,9 +87,6 @@ printf '  %s\n' "${pacpkg[@]}"
 echo
 echo -e "${GREEN}✨ AUR packages:${NC}"
 printf '  %s\n' "${aurpkg[@]}"
-echo
-echo -e "${GREEN}✨ NVIM dependencies:${NC}"
-printf '  %s\n' "${nvim[@]}"
 echo
 
 # ────────────────────────────────

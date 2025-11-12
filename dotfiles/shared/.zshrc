@@ -23,6 +23,7 @@ alias python="python3"
 alias devc="devpod up . && devpod ssh . --command "zsh""
 alias mini="NVIM_APPNAME=nvim-minimax nvim"
 alias beer="NVIM_APPNAME=beervim nvim"
+alias k="NVIM_APPNAME=kick nvim"
 
 if [[ "$(uname)" == 'Darwin' ]]; then
   alias acr="az login && az acr login -n r1k8sacrdev"

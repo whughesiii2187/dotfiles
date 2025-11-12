@@ -16,7 +16,7 @@ local now_if_args = _G.Config.now_if_args
 now_if_args(function()
 add({
   source = "christoomey/vim-tmux-navigator"
-})  
+})
 end)
 now_if_args(function()
   add(
@@ -24,8 +24,8 @@ now_if_args(function()
       source = "oonamo/ef-themes.nvim"
     }
   )
-    require("ef-themes").setup({ 
-      transparent = true 
+    require("ef-themes").setup({
+      transparent = true
     })
     vim.cmd("colorscheme ef-deuteranopia-dark")
 end)
@@ -111,7 +111,8 @@ now_if_args(function()
   -- Use `:h vim.lsp.config()` or 'ftplugin/lsp/' directory to configure servers.
   -- Uncomment and tweak the following `vim.lsp.enable()` call to enable servers.
   -- vim.lsp.enable({
-  --   -- For example, if `lua-language-server` is installed, use `'lua_ls'` entry
+  --   'lua_ls',
+  --   'gopls',
   -- })
 end)
 
@@ -161,6 +162,11 @@ later(function() add('rafamadriz/friendly-snippets') end)
 later(function()
   add('mason-org/mason.nvim')
   require('mason').setup()
+end)
+
+later(function()
+  add("mason-org/mason-lspconfig.nvim")
+    require("mason-lspconfig").setup{ automatic_enable = true }
 end)
 
 -- Beautiful, usable, well maintained color schemes outside of 'mini.nvim' and
