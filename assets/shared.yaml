@@ -5,7 +5,7 @@ pacpkg:
   - bluez-obex
   - btop
   - bottom
-  # - btrfs-progs
+  - btrfs-progs
   - fastfetch
   - fzf
   - gdu
@@ -18,7 +18,7 @@ pacpkg:
   - pipewire-jack
   - pipewire-pulse
   - power-profiles-daemon
-  # - plymouth
+  - plymouth
   - spotify-player
   - stow
   - tmux
@@ -39,7 +39,7 @@ pacpkg:
   - hyprpaper
   - hypridle
   - jq
-  - ly
+  # - ly
   - nwg-displays
   - python
   - qt5-wayland
@@ -58,7 +58,7 @@ pacpkg:
   - wiremix
   - xdg-desktop-portal-hyprland
   - xdg-user-dirs
-  # - snap-pac
+  - snap-pac
   - lazygit
 aurpkg:
   - devpod-bin
@@ -70,9 +70,9 @@ aurpkg:
   - gazelle-tui
   - wlogout
   - waypaper
-  # - limine-snapper-sync
-  # - limine-update
-  # - limine-mkinitcpio-hook
-  # - plymouth-theme-Optimus-git
+  - limine-snapper-sync
+  - limine-update
+  - limine-mkinitcpio-hook
+  - plymouth-theme-Optimus-git
   - tree-sitter-cli 
   - fd

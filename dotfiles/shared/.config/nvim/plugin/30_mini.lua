@@ -154,6 +154,7 @@ now(function() require('mini.starter').setup({
       require("mini.starter").sections.sessions(5, true),
       require("mini.starter").sections.builtin_actions(),
     },
+    footer = function() return "  Press space for the menu" end,
   }) 
 end)
 
