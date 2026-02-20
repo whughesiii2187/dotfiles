@@ -1,0 +1,142 @@
+{
+  // Workspaces
+  "hyprland/workspaces": {
+    "on-scroll-up": "hyprctl dispatch workspace r-1",
+    "on-scroll-down": "hyprctl dispatch workspace r+1",
+    "on-click": "activate",
+    "active-only": false,
+    "all-outputs": true,
+    "format": "{}",
+    "format-icons": {
+      "urgent": "",
+      "active": "",
+      "default": ""
+    },
+    "persistent-workspaces": {
+      "*": 5
+    }
+  },
+  // Empty
+  "custom/empty": {
+    "format": ""
+  },
+  "custom/logo": {
+        "format": "  ",
+        //"format": "",
+        "tooltip": false,
+    },
+  "custom/tools": {
+    "format": "",
+    "tooltip-format": "Tools"
+  },
+  // Current Window
+  "hyprland/window": {
+    "format": "{}"
+  },
+  // Windows VM
+  "custom/windowsvm": {
+    "format": "",
+    "on-click": "kitty $HOME/.config/hypr/scripts/launchvm.sh install",
+    "on-click-right": "kitty $HOME/.config/hypr/scripts/launchvm.sh remove",
+    "tooltip-format": "Left: Launch Win11 VM\nRight: Remove Win11 VM"
+  },
+  // Power Menu
+  "custom/exit": {
+    "format": "",
+    "on-click": "~/.config/hypr/scripts/menu.sh system",
+    "tooltip-format": "Left:Launch power menu"
+  },
+  // Clock
+  "clock": {
+        "format": "{:%A, %B %d, %Y %R}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+                    "mode"          : "month",
+                    "weeks-pos"     : "right",
+                    "on-scroll"     : 1,
+                    "format": {
+                              "months":     "<span color='#ffead3'><b>{}</b></span>",
+                              "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+                              "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+                              "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+                              "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+                              }
+                    },
+        "actions":  {
+                    "on-click-right": "mode",
+                    "on-scroll-up": "shift_up",
+                    "on-scroll-down": "shift_down"
+                    }
+  },
+  // Network
+  "network": {
+    "format": "{ifname}",
+    "format-wifi": " ",
+    "format-ethernet": "  {ifname}",
+    "format-disconnected": "Disconnected ⚠",
+    "tooltip-format": " {ifname} via {gwaddri}",
+    "tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
+    "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50,
+    "on-click": "~/.config/hypr/settings/networkmanager.sh",
+    "on-click-right": "~/.config/hypr/scripts/nm-applet.sh toggle",
+  },
+  // Battery
+  "battery": {
+    "interval": 1,
+    "states": {
+      // "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": "  {capacity}%",
+    "format-plugged": "",
+    "format-alt": "{icon}  {time}",
+    "format-icons": [
+      " ",
+      " ",
+      " ",
+      " ",
+      " "
+    ]
+  },
+  // Power Profiles Daemon
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip-format": "Power profile: {profile}",
+    "tooltip": true,
+    "format-icons": {
+      "default": "",
+      "performance": "",
+      "balanced": "",
+      "power-saver": ""
+    }
+  },
+  // Wireplumber because pulse is old
+  "wireplumber": {
+    "scroll-step": 5, // %, can be a float
+    "format": "{icon}    {volume}%",
+    "format-muted": " {format_source}",
+    "format-source-muted": "",
+    "format-icons": {
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "on-click": "kitty -e wiremix"
+  },
+  // Bluetooth
+  "bluetooth": {
+    "interval": 30,
+    "on-click": "sleep 0.1 && ~/.config/hypr/settings/bluetooth.sh",
+    "format-no-controller": "",
+    "format-on": "󰂯",
+    "format-off": "󰂲",
+    "format-disabled": "", // an empty format will hide the module
+    "format-connected": "󰂱"
+  }
+}

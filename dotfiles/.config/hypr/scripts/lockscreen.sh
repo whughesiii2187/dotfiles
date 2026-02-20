@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Locks the system using hyprlock, but not before ensuring 1password has also been locked, and the screensaver stopped.
+
+# Lock the screen
+pidof hyprlock || ( hyprlock & ); sleep 0.5
+
+# Set keyboard layout to default (first layout)
+hyprctl switchxkblayout all 0 > /dev/null 2>&1
+
