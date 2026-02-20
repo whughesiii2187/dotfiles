@@ -61,9 +61,9 @@
 "$ASSETS_DIR"/install_bitwarden.sh
 "$ASSETS_DIR"/install_zen.sh
 "$ASSETS_DIR"/install_gazelle.sh
-# "$ASSETS_DIR"/install_podman.sh
-# "$ASSETS_DIR"/install_powershell.sh
-# "$ASSETS_DIR"/install_azurecli.sh
+"$ASSETS_DIR"/install_podman.sh
+"$ASSETS_DIR"/install_powershell.sh
+"$ASSETS_DIR"/install_azurecli.sh
 
 ## Install Hyprland and requirements
 "$ASSETS_DIR"/install_hyprland.sh
@@ -83,11 +83,11 @@
 ## Install Encryption and Snapshot utils
 # "$ASSETS_DIR"/install_plymouth.sh
 # "$ASSETS_DIR"/install_optimus.sh
-# "$ASSETS_DIR"/install_snapper.sh
-# "$ASSETS_DIR"/install_liminesnappersync.sh
-# "$ASSETS_DIR"/install_limineupdate.sh
-# "$ASSETS_DIR"/install_liminemkinitcpiohook.sh
-# "$ASSETS_DIR"/install_btrfsprogs.sh
+"$ASSETS_DIR"/install_snapper.sh
+"$ASSETS_DIR"/install_liminesnappersync.sh
+"$ASSETS_DIR"/install_limineupdate.sh
+"$ASSETS_DIR"/install_liminemkinitcpiohook.sh
+"$ASSETS_DIR"/install_btrfsprogs.sh
 
 ## Clone and Stow Dotfiles ##
 if [ -d ~/.dotfiles/.config ]; then
