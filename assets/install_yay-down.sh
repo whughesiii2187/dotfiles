@@ -1,19 +1,12 @@
 #!/bin/bash
+# Usage: ./script.sh <package-name>
+# Alternative AUR installer when YAY is unavailable
 
-# Use /tmp for all clone operations
+PKG="${1:?Usage: $0 <package-name>}"
+
 cd /tmp
-echo -e "${GREEN}Cloning from https://github.com/archlinux/aur.git...${NC}"
 
-aurpkg+=("yay-bin")
-
-for pkg in "${aurpkg[@]}"; do
-  if $DRY_RUN; then
-    echo "Installing from (aur github) $pkg"
-  else
-    echo -e "${GREEN}Fetching and installing $pkg...${NC}"
-    git clone --branch "$pkg" --single-branch https://github.com/archlinux/aur.git "$pkg"
-    cd "$pkg"
-    makepkg -si --noconfirm
-    cd ..
-  fi
-done
+echo -e "${GREEN}Fetching and installing ${PKG}...${NC}"
+git clone --branch "$PKG" --single-branch https://github.com/archlinux/aur.git "$PKG"
+cd "$PKG"
+makepkg -si --noconfirm
