@@ -81,13 +81,14 @@
 "$ASSETS_DIR"/install_zsh.sh
 
 ## Install Encryption and Snapshot utils
-# "$ASSETS_DIR"/install_plymouth.sh
-# "$ASSETS_DIR"/install_optimus.sh
+"$ASSETS_DIR"/install_plymouth.sh
+"$ASSETS_DIR"/install_optimus.sh
 "$ASSETS_DIR"/install_snapper.sh
 "$ASSETS_DIR"/install_liminesnappersync.sh
 "$ASSETS_DIR"/install_limineupdate.sh
 "$ASSETS_DIR"/install_liminemkinitcpiohook.sh
 "$ASSETS_DIR"/install_btrfsprogs.sh
+"$ASSETS_DIR"/config-limine-snapper.sh
 
 ## Clone and Stow Dotfiles ##
 if [ -d ~/.dotfiles/.config ]; then
