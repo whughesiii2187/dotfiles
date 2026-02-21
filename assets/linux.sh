@@ -35,7 +35,6 @@ sudo systemctl start NetworkManager
 sudo systemctl enable limine-snapper-sync.service
 sudo systemctl start limine-snapper-sync.service
 sudo systemctl enable limine-snapper-watcher.service
-sudo systemctl start limine-snapper-watcher.service
 systemctl --user enable pipewire.socket pipewire-pulse.socket wireplumber.service pipewire.service 2>/dev/null || true
 elephant service enable
 
