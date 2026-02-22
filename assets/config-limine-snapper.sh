@@ -31,7 +31,7 @@ EOF
 
   CMDLINE=$(grep "^[[:space:]]*cmdline:" "$limine_config" | head -1 | sed 's/^[[:space:]]*cmdline:[[:space:]]*//')
 
-  sudo cp "$ASSESTS_DIR"/default.conf /etc/default/limine
+  sudo cp /default.conf /etc/default/limine
   sudo sed -i "s|@@CMDLINE@@|$CMDLINE|g" /etc/default/limine
 
   # UKI and EFI fallback are EFI only
@@ -45,7 +45,7 @@ EOF
   fi
 
   # We overwrite the whole thing knowing the limine-update will add the entries for us
-  sudo cp "$ASSESTS_DIR"/limine.conf /boot/limine.conf
+  sudo cp limine.conf /boot/limine.conf
 
 
   # Match Snapper configs if not installing from the ISO
