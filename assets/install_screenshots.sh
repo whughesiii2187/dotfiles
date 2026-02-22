@@ -1,6 +1,6 @@
 #!/bin/sh
 
-packages="dust frim satty gpu-screen-recorder"
+packages="dust grim satty gpu-screen-recorder"
 
 for pkg in $packages; do
   if ! yay -Qi "$pkg" &>/dev/null; then

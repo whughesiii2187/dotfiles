@@ -12,9 +12,6 @@ STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
 if [ "$STATUS" -eq 200 ]; then
   echo -e "${GREEN}AUR is up. Installing yay from aur.archlinux.org...${NC}"
   source "$ASSETS_DIR"/install_yay.sh
-else
-  echo -e "${GREEN}aur.archlinux.org is DOWN. Falling back to GitHub AUR mirror...${NC}"
-  source "$ASSETS_DIR"/install_yay-down.sh
 fi
 
 ## Install_All
@@ -38,14 +35,9 @@ systemctl --user enable pipewire.socket pipewire-pulse.socket wireplumber.servic
 elephant service enable
 
 # Setup Plymouth, snapper snapshots
-# sudo sed -i 's/\(HOOKS=(.*udev\)/\1 plymouth/' /etc/mkinitcpio.conf
 sudo plymouth-set-default-theme optimus
 sudo mkinitcpio -P
 
-# sudo sed -i 's/^TIMELINE_CREATE="yes"/TIMELINE_CREATE="no"/' /etc/snapper/configs/{root,home}
-# sudo sed -i 's/^NUMBER_LIMIT="50"/NUMBER_LIMIT="5"/' /etc/snapper/configs/{root,home}
-# sudo sed -i 's/^NUMBER_LIMIT_IMPORTANT="10"/NUMBER_LIMIT_IMPORTANT="5"/' /etc/snapper/configs/{root,home}
-#
 echo -e "${GREEN}✅ Done!! Rebooting system in 30 seconds... ${NC}"
 sleep 30s
 reboot

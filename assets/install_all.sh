@@ -85,6 +85,7 @@
 "$ASSETS_DIR"/install_optimus.sh
 "$ASSETS_DIR"/install_snapper.sh
 "$ASSETS_DIR"/install_liminesnappersync.sh
+"$ASSETS_DIR"/install_inotify-tools.sh
 "$ASSETS_DIR"/install_limineupdate.sh
 "$ASSETS_DIR"/install_liminemkinitcpiohook.sh
 "$ASSETS_DIR"/install_btrfsprogs.sh
