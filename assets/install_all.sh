@@ -32,7 +32,6 @@ source "$ASSETS_DIR"/install_tmux.sh
 source "$ASSETS_DIR"/install_btop.sh
 source "$ASSETS_DIR"/install_networkmanager.sh
 source "$ASSETS_DIR"/install_wireguard-tools.sh
-source "$ASSETS_DIR"/install_screenshots.sh
 source "$ASSETS_DIR"/install_modemmanager.sh
 source "$ASSETS_DIR"/install_printer-utils.sh
 source "$ASSETS_DIR"/install_networkmanager-openvpn.sh
@@ -64,6 +63,7 @@ source "$ASSETS_DIR"/install_gazelle.sh
 source "$ASSETS_DIR"/install_podman.sh
 source "$ASSETS_DIR"/install_powershell.sh
 source "$ASSETS_DIR"/install_azurecli.sh
+source "$ASSETS_DIR"/install_screenshots.sh
 
 ## Install Hyprland and requirements
 source "$ASSETS_DIR"/install_hyprland.sh
