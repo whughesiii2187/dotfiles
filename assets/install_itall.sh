@@ -6,29 +6,37 @@ set -euo pipefail
 # Helper function to install a package
 install_pkg() {
     local pkg="$1"
-    
-    echo "Installing $pkg..."
+
+    echo -e "${GREEN}Installing $pkg...${NC}"
 
     # Try yay first
     if command -v yay &>/dev/null; then
         if yay -S --noconfirm --needed "$pkg"; then
-            echo "$pkg installed via yay."
+            echo -e "${GREEN}$pkg installed via yay.${NC}"
             return 0
         else
-            echo "yay failed for $pkg. Sending to yay-down.sh..."
-            bash yay-down.sh "$pkg" && return 0
-        fi
-    # If yay is not available, try the helper script
-    elif [[ -f ./yay-down.sh ]]; then
-        if bash yay-down.sh "$pkg"; then
-            echo "$pkg installed via yay-down.sh."
-            return 0
+            echo -e "${YELLOW}yay failed for $pkg. Trying yay-down.sh...${NC}"
+            if [[ -x ./yay-down.sh ]]; then
+                ./yay-down.sh "$pkg" && return 0
+            fi
         fi
     fi
 
-    # Fallback to pacman
-    echo "Installing $pkg via pacman..."
+    # Final fallback to pacman
+    echo -e "${YELLOW}Falling back to pacman for $pkg...${NC}"
     sudo pacman -S --noconfirm --needed "$pkg"
+}
+
+# Function to install a whole group
+install_group() {
+    local group_name="$1"
+    local -n group_ref="$group_name"   # <-- Proper nameref (Bash 4.3+)
+
+    echo -e "${YELLOW}=== Installing group: $group_name ===${NC}"
+
+    for pkg in "${group_ref[@]}"; do
+        install_pkg "$pkg"
+    done
 }
 
 # Package groups
@@ -52,13 +60,11 @@ apps_packages=(
 azure-cli bind bitwarden btop evince fastfetch kitty lazygit libreoffice-fresh neovim pinta podman podman-compose podman-docker powershell-bin ripgrep spotify thunar tmux zen-browser-bin figlet fzf gum ohmyposh satty
 )
 
-# Loop through all groups
-for group in core_packages hypr_packages audio_packages fonts_packages apps_packages; do
-    echo "=== Installing group: $group ==="
-    for pkg in "${!group}"; do
-        install_pkg "$pkg"
-    done
-done
+install_group core_packages
+install_group hypr_packages
+install_group audio_packages
+install_group fonts_packages
+install_group apps_packages
 
 echo -e "${GREEN}All packages installed successfully!${NC}"
 

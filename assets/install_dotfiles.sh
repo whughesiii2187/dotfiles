@@ -1,5 +1,6 @@
 #!/bin/sh
 
+echo -e "${GREEN} Creating .local/share and .dotfiles in ~${NC}"
 mkdir -p ~/.local/share
 mkdir -p ~/.dotfiles
 rm -rf ~/.config/hypr
@@ -26,6 +27,7 @@ fi
 # ln -s /mnt/dotfiles-repo/dotfiles/.config/waybar ~/.config/waybar
 # ln -s /mnt/dotfiles-repo/applications ~/.local/share/applications
 
+echo -e "${GREEN}Stowing files... ${NC}"
 cp -r applications ~/.local/share/
 
 cp -r dotfiles/.* ~/.dotfiles
