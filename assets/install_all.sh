@@ -75,7 +75,6 @@ source "$ASSETS_DIR"/install_hyprnotify.sh
 source "$ASSETS_DIR"/install_walker.sh
 source "$ASSETS_DIR"/install_waybar.sh
 source "$ASSETS_DIR"/install_wayfreeze.sh
-source "$ASSETS_DIR"/install_wlogout.sh
 source "$ASSETS_DIR"/install_ly.sh
 source "$ASSETS_DIR"/install_mako.sh
 source "$ASSETS_DIR"/install_zsh.sh
