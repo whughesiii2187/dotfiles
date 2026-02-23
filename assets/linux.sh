@@ -15,7 +15,7 @@ if [ "$STATUS" -eq 200 ]; then
 fi
 
 ## Install_All
-source "$ASSETS_DIR"/install_all.sh
+source "$ASSETS_DIR"/install_itall.sh
 
 # Enable services
 echo -e "${GREEN}Enabling services...${NC}"
@@ -34,19 +34,16 @@ sudo systemctl start NetworkManager
 systemctl --user enable pipewire.socket pipewire-pulse.socket wireplumber.service pipewire.service 2>/dev/null || true
 elephant service enable
 
-if [ ! -f ~/.zshrc ]; then
-  echo -e "${GREEN}.zshrc file not found, not deleting ${NC}"
-else
-  rm ~/.zshrc
-fi
-
+echo -e "${GREEN} Changing shell to zsh ${NC}"
 chsh -s $(which zsh)
 
+echo -e "${GREEN} Creating user home dirs ${NC}"
 xdg-user-dirs-update
 
-# Setup Plymouth, snapper snapshots
-sudo plymouth-set-default-theme optimus
-sudo mkinitcpio -P
+
+# echo -e "${GREEN}Setup Plymouth, snapper snapshots ${NC}"
+# sudo plymouth-set-default-theme optimus
+# sudo mkinitcpio -P
 
 echo -e "${GREEN}✅ Done!! Rebooting system in 30 seconds... ${NC}"
 sleep 30s

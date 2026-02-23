@@ -5,6 +5,12 @@ mkdir -p ~/.dotfiles
 rm -rf ~/.config/hypr
 rm -rf ~/.config/kitty
 
+if [ ! -f ~/.zshrc ]; then
+  echo -e "${GREEN}.zshrc file not found, not deleting ${NC}"
+else
+  rm ~/.zshrc
+fi
+
 # ln -s /mnt/dotfiles-repo/dotfiles/.oh-my-zsh ~/.oh-my-zsh
 # ln -s /mnt/dotfiles-repo/dotfiles/.tmux ~/.tmux
 # ln -s /mnt/dotfiles-repo/dotfiles/.tmux.conf ~/.tmux.conf

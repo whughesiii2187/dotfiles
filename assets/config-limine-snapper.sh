@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "${GREEN}Configure Limine snapshots.. ${NC}"
+echo -e "${GREEN}Configure Limine snapshots.. ${NC}"
 
 
 sudo tee /etc/mkinitcpio.conf.d/hooks.conf <<EOF >/dev/null
@@ -25,7 +25,7 @@ elif [[ -f /boot/limine/limine.conf ]]; then
 elif [[ -f /boot/limine.conf ]]; then
   limine_config="/boot/limine.conf"
 else
-  echo "Error: Limine config not found" >&2
+  echo -e "${YELLOW}Error: Limine config not found ${NC}" >&2
   exit 1
 fi
 
@@ -67,7 +67,7 @@ sudo sed -i 's/^NUMBER_LIMIT_IMPORTANT="10"/NUMBER_LIMIT_IMPORTANT="5"/' /etc/sn
 sudo sed -i 's/^SPACE_LIMIT="0.5"/SPACE_LIMIT="0.3"/' /etc/snapper/configs/{root,home}
 sudo sed -i 's/^FREE_LIMIT="0.2"/FREE_LIMIT="0.3"/' /etc/snapper/configs/{root,home}
 
-echo "Re-enabling mkinitcpio hooks..."
+echo -e "${GREEN}Re-enabling mkinitcpio hooks...${NC}"
 
 # Restore the specific mkinitcpio pacman hooks
 if [ -f /usr/share/libalpm/hooks/90-mkinitcpio-install.hook.disabled ]; then
@@ -78,7 +78,7 @@ if [ -f /usr/share/libalpm/hooks/60-mkinitcpio-remove.hook.disabled ]; then
   sudo mv /usr/share/libalpm/hooks/60-mkinitcpio-remove.hook.disabled /usr/share/libalpm/hooks/60-mkinitcpio-remove.hook
 fi
 
-echo "mkinitcpio hooks re-enabled"
+echo -e "${GREEN}mkinitcpio hooks re-enabled ${NC}"
 
 sudo limine-update
 
