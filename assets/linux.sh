@@ -29,8 +29,6 @@ sudo systemctl stop systemd-networkd && sudo systemctl disable systemd-networkd
 sudo systemctl stop wpa_supplicant && sudo systemctl disable wpa_supplicant
 sudo systemctl enable NetworkManager
 sudo systemctl start NetworkManager
-# sudo systemctl enable limine-snapper-sync.service
-# sudo systemctl start limine-snapper-sync.service
 systemctl --user enable pipewire.socket pipewire-pulse.socket wireplumber.service pipewire.service 2>/dev/null || true
 elephant service enable
 
@@ -40,10 +38,9 @@ chsh -s $(which zsh)
 echo -e "${GREEN} Creating user home dirs ${NC}"
 xdg-user-dirs-update
 
-
-# echo -e "${GREEN}Setup Plymouth, snapper snapshots ${NC}"
-# sudo plymouth-set-default-theme optimus
-# sudo mkinitcpio -P
+echo -e "${GREEN}Setup Plymouth, snapper snapshots ${NC}"
+sudo plymouth-set-default-theme optimus
+sudo mkinitcpio -P
 
 echo -e "${GREEN}✅ Done!! Rebooting system in 30 seconds... ${NC}"
 sleep 30s

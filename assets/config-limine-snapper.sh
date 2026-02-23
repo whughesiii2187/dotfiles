@@ -4,7 +4,7 @@ echo -e "${GREEN}Configure Limine snapshots.. ${NC}"
 
 
 sudo tee /etc/mkinitcpio.conf.d/hooks.conf <<EOF >/dev/null
-HOOKS=(base udev keyboard autodetect microcode modconf kms keymap consolefont block encrypt filesystems fsck btrfs-overlayfs)
+HOOKS=(base udev plymouth keyboard autodetect microcode modconf kms keymap consolefont block encrypt filesystems fsck btrfs-overlayfs)
 EOF
 sudo tee /etc/mkinitcpio.conf.d/thunderbolt_module.conf <<EOF >/dev/null
 MODULES+=(thunderbolt)
@@ -78,7 +78,7 @@ if [ -f /usr/share/libalpm/hooks/60-mkinitcpio-remove.hook.disabled ]; then
   sudo mv /usr/share/libalpm/hooks/60-mkinitcpio-remove.hook.disabled /usr/share/libalpm/hooks/60-mkinitcpio-remove.hook
 fi
 
-echo -e "${GREEN}mkinitcpio hooks re-enabled ${NC}"
+echo -e "${GREEN}mkinitcpio hooks re-enabled${NC}"
 
 sudo limine-update
 
