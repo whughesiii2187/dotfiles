@@ -81,15 +81,15 @@ source "$ASSETS_DIR"/install_mako.sh
 source "$ASSETS_DIR"/install_zsh.sh
 
 ## Install Encryption and Snapshot utils
-source "$ASSETS_DIR"/install_plymouth.sh
-source "$ASSETS_DIR"/install_optimus.sh
+# source "$ASSETS_DIR"/install_plymouth.sh
+# source "$ASSETS_DIR"/install_optimus.sh
 source "$ASSETS_DIR"/install_snapper.sh
 source "$ASSETS_DIR"/install_liminesnappersync.sh
 source "$ASSETS_DIR"/install_inotify-tools.sh
 source "$ASSETS_DIR"/install_limineupdate.sh
 source "$ASSETS_DIR"/install_liminemkinitcpiohook.sh
 source "$ASSETS_DIR"/install_btrfsprogs.sh
-# source "$ASSETS_DIR"/config-limine-snapper.sh
+source "$ASSETS_DIR"/config-limine-snapper.sh
 
 ## Clone and Stow Dotfiles ##
 if [ -d ~/.dotfiles/.config ]; then

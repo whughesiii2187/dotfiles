@@ -6,5 +6,3 @@ if ! yay -Qi "xdg-user-dirs" &>/dev/null; then
 else
   echo "${YELLOW}xdg-user-dirs already installed, skipping${NC}"
 fi
-
-xdg-user-dirs-update

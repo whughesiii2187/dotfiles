@@ -34,6 +34,16 @@ sudo systemctl start NetworkManager
 systemctl --user enable pipewire.socket pipewire-pulse.socket wireplumber.service pipewire.service 2>/dev/null || true
 elephant service enable
 
+if [ ! -f ~/.zshrc ]; then
+  echo -e "${GREEN}.zshrc file not found, not deleting ${NC}"
+else
+  rm ~/.zshrc
+fi
+
+chsh -s $(which zsh)
+
+xdg-user-dirs-update
+
 # Setup Plymouth, snapper snapshots
 sudo plymouth-set-default-theme optimus
 sudo mkinitcpio -P

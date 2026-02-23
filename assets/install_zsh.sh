@@ -11,11 +11,3 @@ for pkg in $packages; do
   fi
 done
 
-chsh -s $(which zsh)
-
-if [ ! -f ~/.zshrc ]; then
-  echo -e "${GREEN}.zshrc file not found, not deleting ${NC}"
-else
-  rm ~/.zshrc
-fi
-
