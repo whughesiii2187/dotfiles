@@ -12,7 +12,7 @@ for pkg in "${pkgs[@]}"; do
   if command -v yay &>/dev/null; then
       if yay -S --noconfirm --needed "$pkg"; then
           echo -e "${GREEN}$pkg installed via yay ${NC}"
-          return 0
+          continue 
       fi
   fi
 
@@ -20,7 +20,7 @@ for pkg in "${pkgs[@]}"; do
   if [[ -x ./yay-down.sh ]]; then
       if ./yay-down.sh "$pkg"; then
           echo -e "${GREEN}$pkg installed via yay-down.sh ${NC}"
-          return 0
+          continue
       fi
   fi
 

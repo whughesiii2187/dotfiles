@@ -32,10 +32,10 @@ sudo systemctl start NetworkManager
 systemctl --user enable pipewire.socket pipewire-pulse.socket wireplumber.service pipewire.service 2>/dev/null || true
 elephant service enable
 
-echo -e "${GREEN} Changing shell to zsh ${NC}"
+echo -e "${GREEN}Changing shell to zsh ${NC}"
 chsh -s $(which zsh)
 
-echo -e "${GREEN} Creating user home dirs ${NC}"
+echo -e "${GREEN}Creating user home dirs ${NC}"
 xdg-user-dirs-update
 
 echo -e "${GREEN}Setup Plymouth, snapper snapshots ${NC}"
