@@ -42,6 +42,9 @@ echo -e "${GREEN}Setup Plymouth, snapper snapshots ${NC}"
 sudo plymouth-set-default-theme optimus
 sudo mkinitcpio -P
 
+echo -e "${GREEN}Creating initial snapshot ${NC}"
+sudo snapper create -d "ArchSystem"
+
 echo -e "${GREEN}✅ Done!! Rebooting system in 30 seconds... ${NC}"
 sleep 30s
 reboot
