@@ -61,8 +61,8 @@ azure-cli bind bitwarden btop evince fastfetch kitty lazygit libreoffice-fresh n
 )
 
 install_group core_packages
-install_group hypr_packages
 install_group audio_packages
+install_group hypr_packages
 install_group fonts_packages
 install_group apps_packages
 
