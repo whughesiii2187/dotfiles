@@ -2,6 +2,32 @@
 
 echo -e "${GREEN}Configure Limine snapshots.. ${NC}"
 
+echo -e "${YELLOW} Installing limine / snapper related packages${NC}"
+pkgs=( snapper limine-mkinitcpio-hook limine-snapper-sync limine-snapper-watcher snap-pac )
+
+for pkg in "${pkgs[@]}"; do
+  echo -e "${GREEN}Installing $pkg...${NC}"
+
+  # Try yay
+  if command -v yay &>/dev/null; then
+      if yay -S --noconfirm --needed "$pkg"; then
+          echo -e "${GREEN}$pkg installed via yay ${NC}"
+          return 0
+      fi
+  fi
+
+  # Try yay-down.sh
+  if [[ -x ./yay-down.sh ]]; then
+      if ./yay-down.sh "$pkg"; then
+          echo -e "${GREEN}$pkg installed via yay-down.sh ${NC}"
+          return 0
+      fi
+  fi
+
+  # Fallback to pacman
+  echo -e "${GREEN}Falling back to pacman for $pkg${NC}"
+  sudo pacman -S --noconfirm --needed "$pkg"
+done
 
 sudo tee /etc/mkinitcpio.conf.d/hooks.conf <<EOF >/dev/null
 HOOKS=(base udev plymouth keyboard autodetect microcode modconf kms keymap consolefont block encrypt filesystems fsck btrfs-overlayfs)

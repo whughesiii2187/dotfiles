@@ -41,7 +41,7 @@ install_group() {
 
 # Package groups
 core_packages=(
-btrfs-progs brightnessctl cups cups-browsed cups-filters cups-pdf dust fd gazelle-tui gdu inetutils inotify-tools snapper limine-mkinitcpio-hook limine-snapper-sync limine-snapper-watcher snap-pac nwg-displays ly modemmanager networkmanager networkmanager-openvpn plymouth plymouth-theme-optimus-git stow tlp tlp-pd udiskie ufw unzip usbutils wget wireguard-tools zsh
+btrfs-progs brightnessctl cups cups-browsed cups-filters cups-pdf dust fd gazelle-tui gdu inetutils inotify-tools nwg-displays ly modemmanager networkmanager networkmanager-openvpn plymouth plymouth-theme-optimus-git stow tlp tlp-pd udiskie ufw unzip usbutils wget wireguard-tools zsh
 )
 
 hypr_packages=(
