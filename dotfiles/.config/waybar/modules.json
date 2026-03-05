@@ -1,19 +1,25 @@
 {
   // Workspaces
   "hyprland/workspaces": {
-    "on-scroll-up": "hyprctl dispatch workspace r-1",
-    "on-scroll-down": "hyprctl dispatch workspace r+1",
     "on-click": "activate",
     "active-only": false,
     "all-outputs": true,
+    "disable-scroll": true,
     "format": "{}",
     "format-icons": {
-      "urgent": "",
-      "active": "",
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
       "default": ""
     },
     "persistent-workspaces": {
-      "*": 5
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": [],
     }
   },
   // Empty
@@ -90,8 +96,8 @@
       "warning": 30,
       "critical": 15
     },
-    "format": "{icon} {capacity}%",
-    "format-charging": "  {capacity}%",
+    "format": "{icon}",
+    "format-charging": "",
     "format-plugged": "",
     "format-alt": "{icon}  {time}",
     "format-icons": [
@@ -117,7 +123,7 @@
   // Wireplumber because pulse is old
   "wireplumber": {
     "scroll-step": 5, // %, can be a float
-    "format": "{icon}    {volume}%",
+    "format": "{icon}",
     "format-muted": " {format_source}",
     "format-source-muted": "",
     "format-icons": {

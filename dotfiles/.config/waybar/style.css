@@ -11,6 +11,7 @@
 @define-color textcolor2 #000000;
 @define-color textcolor3 #FFFFFF;
 @define-color iconcolor #FFFFFF;
+@define-color primary_container #1e4876;
 
 * {
     font-family: "Fira Sans", "Font Awesome", "Material Icons", sans-serif;
@@ -54,7 +55,7 @@
 #workspaces button.active,
 #workspaces button:hover {
     color: @textcolor1;
-    background: #93ccea;
+    background: @primary_container;
     border-radius: 1px;
 }
 
@@ -80,7 +81,7 @@ tooltip label {
     margin-right: 8px;
     border-radius: 8px;
     color: @textcolor1;
-    font-size: 11px;
+    font-size: 12px;
 }
 
 /* -----------------------------------------------------
@@ -103,9 +104,8 @@ tooltip label {
 #custom-appmenu,
 #custom-notification,
 #custom-exit,
-#custom-updates,
-#custom-youtube {
-    font-size: 11px;
+#custom-updates {
+    font-size: 13px;
     color: @textcolor1;
     margin-right: 6px;
     padding: 0;
@@ -126,7 +126,7 @@ tooltip label {
 #backlight,
 #wireplumber,
 #network {
-    font-size: 11px;
+    font-size: 13px;
     color: @textcolor1;
     margin-right: 4px;
 }
@@ -136,7 +136,7 @@ tooltip label {
 }
 
 #clock {
-    font-size: 11px;
+    font-size: 10px;
     color: @textcolor1;
     margin-right: 6px;
 }
@@ -145,7 +145,7 @@ tooltip label {
  * Bluetooth / Battery
  * ----------------------------------------------------- */
 #battery {
-    font-size: 11px;
+    font-size: 13px;
     color: @textcolor1;
     margin-right: 6px;
 }

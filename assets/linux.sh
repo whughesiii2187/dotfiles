@@ -15,7 +15,7 @@ if [ "$STATUS" -eq 200 ]; then
 fi
 
 ## Install_All
-source "$ASSETS_DIR"/install_itall.sh
+source "$ASSETS_DIR"/install_all.sh
 
 # Enable services
 echo -e "${GREEN}Enabling services...${NC}"
@@ -24,13 +24,16 @@ sudo systemctl enable bluetooth.service
 sudo systemctl enable tlp.service
 sudo systemctl enable --now tlp-pd.service
 sudo systemctl enable --now swayosd-libinput-backend.service
-sudo systemctl stop iwd systemd-networkd && systemctl disable iwd systemd-networkd
+sudo systemctl enable --now cups.service
+sudo systemctl stop iwd && sudo systemctl disable iwd
 sudo systemctl stop systemd-networkd && sudo systemctl disable systemd-networkd
 sudo systemctl stop wpa_supplicant && sudo systemctl disable wpa_supplicant
 sudo systemctl enable NetworkManager
 sudo systemctl start NetworkManager
 systemctl --user enable pipewire.socket pipewire-pulse.socket wireplumber.service pipewire.service 2>/dev/null || true
 elephant service enable
+
+sudo cp -R "$SCRIPT_DIR"/etc/modprobe.d/alsa.conf /etc/modprobe.d/alsa.conf
 
 echo -e "${GREEN}Changing shell to zsh ${NC}"
 chsh -s $(which zsh)

@@ -1,100 +1,82 @@
 #!/bin/sh
 
-## Install Utilities
-source "$ASSETS_DIR"/install_power.sh
-source "$ASSETS_DIR"/install_fastfetch.sh
-source "$ASSETS_DIR"/install_gdu.sh
-source "$ASSETS_DIR"/install_gum.sh
-source "$ASSETS_DIR"/install_gtk4.sh
-source "$ASSETS_DIR"/install_unzip.sh
-source "$ASSETS_DIR"/install_wget.sh
-source "$ASSETS_DIR"/install_figlet.sh
-source "$ASSETS_DIR"/install_brightness.sh
-source "$ASSETS_DIR"/install_nwg-displays.sh
-source "$ASSETS_DIR"/install_udiskie.sh
-source "$ASSETS_DIR"/install_ufw.sh
-source "$ASSETS_DIR"/install_xdg-user-dirs.sh
-source "$ASSETS_DIR"/install_fzf.sh
-source "$ASSETS_DIR"/install_lazygit.sh
-source "$ASSETS_DIR"/install_fd.sh
-source "$ASSETS_DIR"/install_usbutils.sh
-source "$ASSETS_DIR"/install_inetutils.sh
-source "$ASSETS_DIR"/install_bind.sh
-source "$ASSETS_DIR"/install_ripgrep.sh
-source "$ASSETS_DIR"/install_clipboard.sh
-source "$ASSETS_DIR"/install_wayland.sh
-source "$ASSETS_DIR"/install_qt5-wayland.sh
-source "$ASSETS_DIR"/install_qt6-wayland.sh
-source "$ASSETS_DIR"/install_xdg-desktopportal-hyprland.sh
-source "$ASSETS_DIR"/install_xdg-desktopportal-gtk.sh
-source "$ASSETS_DIR"/install_stow.sh
-source "$ASSETS_DIR"/install_tmux.sh
-source "$ASSETS_DIR"/install_btop.sh
-source "$ASSETS_DIR"/install_networkmanager.sh
-source "$ASSETS_DIR"/install_wireguard-tools.sh
-source "$ASSETS_DIR"/install_modemmanager.sh
-source "$ASSETS_DIR"/install_printer-utils.sh
-source "$ASSETS_DIR"/install_networkmanager-openvpn.sh
+#!/usr/bin/env bash
+set -euo pipefail
 
-## Install Fonts
-source "$ASSETS_DIR"/install_0xproto-font.sh
-source "$ASSETS_DIR"/install_awesome-font.sh
-source "$ASSETS_DIR"/install_firacode-font.sh
-source "$ASSETS_DIR"/install_firacodenerd-font.sh
-source "$ASSETS_DIR"/install_firasans-font.sh
+# Helper function to install a package
+install_pkg() {
+    local pkg="$1"
 
-## Install Audio
-source "$ASSETS_DIR"/install_bluetooth.sh
-source "$ASSETS_DIR"/install_audio.sh
+    echo -e "${GREEN}Installing $pkg...${NC}"
 
-## Install Apps
-source "$ASSETS_DIR"/install_libreoffice.sh
-source "$ASSETS_DIR"/install_neovim.sh
-source "$ASSETS_DIR"/install_vlc.sh
-source "$ASSETS_DIR"/install_thunar.sh
-source "$ASSETS_DIR"/install_spotify.sh
-source "$ASSETS_DIR"/install_evince.sh
-source "$ASSETS_DIR"/install_pinta.sh
-source "$ASSETS_DIR"/install_kitty.sh
-source "$ASSETS_DIR"/install_slurp.sh
-source "$ASSETS_DIR"/install_bitwarden.sh
-source "$ASSETS_DIR"/install_zen.sh
-source "$ASSETS_DIR"/install_gazelle.sh
-source "$ASSETS_DIR"/install_podman.sh
-source "$ASSETS_DIR"/install_powershell.sh
-source "$ASSETS_DIR"/install_azurecli.sh
-source "$ASSETS_DIR"/install_screenshots.sh
+    # Try yay first
+    if command -v yay &>/dev/null; then
+        if yay -S --noconfirm --needed "$pkg"; then
+            echo -e "${GREEN}$pkg installed via yay.${NC}"
+            return 0
+        else
+            echo -e "${YELLOW}yay failed for $pkg. Trying yay-down.sh...${NC}"
+            if [[ -x ./yay-down.sh ]]; then
+                ./yay-down.sh "$pkg" && return 0
+            fi
+        fi
+    fi
 
-## Install Hyprland and requirements
-source "$ASSETS_DIR"/install_hyprland.sh
-source "$ASSETS_DIR"/install_hyprlock.sh
-source "$ASSETS_DIR"/install_hyprutils.sh
-source "$ASSETS_DIR"/install_hyprpaper.sh
-source "$ASSETS_DIR"/install_hypridle.sh
-source "$ASSETS_DIR"/install_hyprnotify.sh
-source "$ASSETS_DIR"/install_walker.sh
-source "$ASSETS_DIR"/install_waybar.sh
-source "$ASSETS_DIR"/install_wayfreeze.sh
-source "$ASSETS_DIR"/install_ly.sh
-source "$ASSETS_DIR"/install_mako.sh
-source "$ASSETS_DIR"/install_zsh.sh
+    # Final fallback to pacman
+    echo -e "${YELLOW}Falling back to pacman for $pkg...${NC}"
+    sudo pacman -S --noconfirm --needed "$pkg"
+}
 
-## Install Encryption and Snapshot utils
-# source "$ASSETS_DIR"/install_plymouth.sh
-# source "$ASSETS_DIR"/install_optimus.sh
-source "$ASSETS_DIR"/install_snapper.sh
-source "$ASSETS_DIR"/install_liminesnappersync.sh
-source "$ASSETS_DIR"/install_inotify-tools.sh
-source "$ASSETS_DIR"/install_limineupdate.sh
-source "$ASSETS_DIR"/install_liminemkinitcpiohook.sh
-source "$ASSETS_DIR"/install_btrfsprogs.sh
+# Function to install a whole group
+install_group() {
+    local group_name="$1"
+    local -n group_ref="$group_name"   # <-- Proper nameref (Bash 4.3+)
+
+    echo -e "${YELLOW}=== Installing group: $group_name ===${NC}"
+
+    for pkg in "${group_ref[@]}"; do
+        install_pkg "$pkg"
+    done
+}
+
+# Package groups
+core_packages=(
+btrfs-progs brightnessctl cups cups-browsed cups-filters cups-pdf dust fd gazelle-tui gdu inetutils inotify-tools nwg-displays ly modemmanager networkmanager networkmanager-openvpn plymouth plymouth-theme-optimus-git stow tlp tlp-pd udiskie ufw unzip usbutils wget wireguard-tools zsh bolt 
+)
+
+hypr_packages=(
+elephant elephant-bluetooth elephant-calc elephant-clipboard elephant-desktopapplications elephant-files elephant-menus elephant-providerList elephant-runner elephant-symbols elephant-todo elephant-unicode elephant-websearch gpu-screen-recorder hplip hypridle hyprland hyprland-guiutils hyprland-preview-share-picker hyprlock hyprnotify hyprpaper hyprsunset mako swayosd system-config-printer walker-bin waybar wayfreeze wayland wl-clipboard xdg-desktop-portal-gtk xdg-desktop-portal-hyprland xdg-user-dirs gtk3 gtk4 qt5-wayland qt6-wayland grim slurp waypaper-git
+)
+
+audio_packages=(
+bluez bluez-obex bluez-utils bluetuith pamixer pipewire pipewire-jack pipewire-pulse playerctl wiremix wireplumber ffplay vlc sof-firmware pipewire-alsa libpulse
+)
+
+fonts_packages=(
+otf-font-awesome ttf-0xproto-nerd ttf-fira-code ttf-firacode-nerd ttf-fira-sans noto-fonts-emoji ttg-jetbrains-mono-nerd
+)
+
+apps_packages=(
+azure-cli bind bitwarden btop evince fastfetch kitty lazygit libreoffice-fresh neovim pinta podman podman-compose podman-docker powershell-bin ripgrep spotify thunar tmux zen-browser-bin figlet fzf gum oh-my-posh satty
+)
+
+install_group core_packages
+install_group audio_packages
+install_group hypr_packages
+install_group fonts_packages
+install_group apps_packages
+
+echo -e "${GREEN}All packages installed successfully!${NC}"
+
+echo -e "${GREEN} Configure limine and snapper for snapshots${NC}"
+
 source "$ASSETS_DIR"/config-limine-snapper.sh
 
 ## Clone and Stow Dotfiles ##
 if [ -d ~/.dotfiles/.config ]; then
-  echo "Dotfiles appear to be installed already, skipping"
+  echo -e "${YELLOW}Dotfiles appear to be installed already, skipping${NC}"
 else
-  "$ASSETS_DIR"/install_dotfiles.sh
+  source "$ASSETS_DIR"/install_dotfiles.sh
 fi
 
 ## Setup VPN ##
