@@ -4,8 +4,8 @@ window-padding-y = 0
 window-padding-balance = false
 
 # ── font ───────────────────────────────────────────────────────────────────────
-# font-family = your-font-here
-# font-size = 13
+font-family = your-font-here
+font-size = 20
 
 # ── shell ──────────────────────────────────────────────────────────────────────
 shell-integration = detect
