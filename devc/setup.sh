@@ -17,7 +17,7 @@ brew install neovim fzf lazygit zsh tmux copilot claude-cmd font-0xproto-nerd-fo
 ### Dotfiles
 ### ----------------------------
 echo "Applying dotfiles"
-mkdir $HOME/.config
+mkdir "$HOME/.config"
 
 if [ -f "$HOME/.oh-my-zsh" ]; then
   rm -rf "$HOME/.oh-my-zsh"
