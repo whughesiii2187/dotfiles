@@ -11,7 +11,7 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 brew update
 
 echo "Installing packages"
-brew install neovim fzf lazygit zsh tmux copilot
+brew install neovim fzf lazygit zsh tmux copilot claude-cmd font-0xproto-nerd-font tree-sitter-cli gcc clipboard ripgrep
 
 ### ----------------------------
 ### Dotfiles
