@@ -6,12 +6,15 @@ XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 echo "Installing Brew"
 curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash
 
+echo "Installing oh-my-zsh"
+curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | bash
+
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 
 brew update
 
 echo "Installing packages"
-brew install neovim fzf lazygit zsh tmux copilot claude-cmd font-0xproto-nerd-font tree-sitter-cli gcc clipboard ripgrep
+brew install neovim fzf lazygit zsh tmux copilot claude-code font-0xproto-nerd-font tree-sitter-cli gcc clipboard ripgrep
 
 ### ----------------------------
 ### Dotfiles

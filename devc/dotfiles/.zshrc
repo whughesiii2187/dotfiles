@@ -23,3 +23,5 @@ alias gg="lazygit"
 alias ff='nvim "$(fzf)"'
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+
+tmux -u
