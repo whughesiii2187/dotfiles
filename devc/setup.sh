@@ -14,7 +14,7 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 brew update
 
 echo "Installing packages"
-brew install neovim fzf lazygit zsh tmux copilot claude-code font-0xproto-nerd-font tree-sitter-cli gcc clipboard ripgrep
+brew install neovim fzf lazygit zsh tmux copilot claude-code font-0xproto-nerd-font gcc clipboard ripgrep
 
 ### ----------------------------
 ### Dotfiles
@@ -22,13 +22,7 @@ brew install neovim fzf lazygit zsh tmux copilot claude-code font-0xproto-nerd-f
 echo "Applying dotfiles"
 mkdir "$HOME/.config"
 
-if [ -f "$HOME/.oh-my-zsh" ]; then
-  rm -rf "$HOME/.oh-my-zsh"
-fi
-
 ln -sfn "$DOTFILES_DIR/dotfiles/.config/nvim" "$XDG_CONFIG_HOME/nvim"
-ln -sfn "$DOTFILES_DIR/dotfiles/.oh-my-zsh" "$HOME/.oh-my-zsh"
-ln -sfn "$DOTFILES_DIR/dotfiles/.tmux" "$HOME/.tmux"
 ln -sfn "$DOTFILES_DIR/dotfiles/.tmux.conf" "$HOME/.tmux.conf"
 
 ZSHRC="$HOME/.zshrc"

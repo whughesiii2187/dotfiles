@@ -24,4 +24,7 @@ alias ff='nvim "$(fzf)"'
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 
-tmux -u
+if [ -z "$TMUX" ]
+then
+    tmux attach -t TMUX || tmux new -su TMUX
+fi
