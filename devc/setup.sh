@@ -17,7 +17,7 @@ echo "/home/linuxbrew/.linuxbrew/bin/zsh" | sudo tee -a /etc/shells
 echo "Installing oh-my-zsh"
 curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | bash
 
-brew install neovim fzf lazygit zsh tmux copilot claude-code font-0xproto-nerd-font gcc clipboard ripgrep
+brew install neovim fzf lazygit zsh tmux claude-code font-0xproto-nerd-font gcc clipboard ripgrep
 
 ### ----------------------------
 ### Dotfiles
