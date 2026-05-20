@@ -23,8 +23,3 @@ alias gg="lazygit"
 alias ff='nvim "$(fzf)"'
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
-
-if [ -z "$TMUX" ]
-then
-    tmux attach -t TMUX || tmux new -su TMUX
-fi

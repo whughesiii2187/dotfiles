@@ -13,7 +13,6 @@ brew update
 echo "Installing packages"
 brew install zsh
 echo "/home/linuxbrew/.linuxbrew/bin/zsh" | sudo tee -a /etc/shells
-chsh -s /home/linuxbrew/.linuxbrew/bin/zsh "$USER"
 
 echo "Installing oh-my-zsh"
 curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | bash
