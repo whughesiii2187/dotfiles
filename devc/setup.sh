@@ -25,6 +25,8 @@ brew install neovim fzf lazygit zsh tmux claude-code font-0xproto-nerd-font gcc 
 echo "Applying dotfiles"
 mkdir "$HOME/.config"
 
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 ln -sfn "$DOTFILES_DIR/dotfiles/.config/nvim" "$XDG_CONFIG_HOME/nvim"
 ln -sfn "$DOTFILES_DIR/dotfiles/.tmux.conf" "$HOME/.tmux.conf"
 
@@ -32,7 +34,7 @@ ZSHRC="$HOME/.zshrc"
 DOTFILE_ALIASES="$DOTFILES_DIR/dotfiles/.zshrc"
 
 if [ -f "$ZSHRC" ]; then
-  echo "source $DOTFILES_DIR/dotfiles/.zshrc" >> "$HOME/.zshrc"
+  echo "source $DOTFILES_DIR/dotfiles/.zshrc" >>"$HOME/.zshrc"
 else
   ln -sfn "$DOTFILES_DIR/dotfiles/.zshrc" "$HOME/.zshrc"
 fi
