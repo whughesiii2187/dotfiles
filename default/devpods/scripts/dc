@@ -1,0 +1,19 @@
+#!/usr/bin/env zsh
+# ~/bin/dc
+set -e
+
+case "$1" in
+  up)
+    devcontainer up \
+      --workspace-folder . \
+    ;;
+  ssh)
+    echo "Entering devcontianer"
+    devcontainer exec \
+      --workspace-folder . \
+     zsh
+    ;;
+  *)
+    devcontainer "$@"
+    ;;
+esac

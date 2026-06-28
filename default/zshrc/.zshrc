@@ -22,7 +22,8 @@ alias gg="lazygit"
 alias ff="fzf"
 alias getmyip="dig -4 TXT +short o-o.myaddr.l.google.com @ns1.google.com"
 alias python="python3"
-alias devpod="~/scripts/dc"
+alias devup="~/scripts/dc up"
+alias devssh="~/scripts/dc ssh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
