@@ -89,9 +89,11 @@ nmap_leader('ba', '<Cmd>b#<CR>',                                 'Alternate')
 nmap_leader('bd', '<Cmd>lua MiniBufremove.delete()<CR>',         'Delete')
 nmap_leader('bD', '<Cmd>lua MiniBufremove.delete(0, true)<CR>',  'Delete!')
 nmap_leader('bs', '<Cmd>w<CR>',                                  'Save')
-nmap_leader('bS', new_scratch_buffer,                            'Scratch')
+-- nmap_leader('bS', new_scratch_buffer,                            'Scratch')
 nmap_leader('bw', '<Cmd>lua MiniBufremove.wipeout()<CR>',        'Wipeout')
 nmap_leader('bW', '<Cmd>lua MiniBufremove.wipeout(0, true)<CR>', 'Wipeout!')
+xmap_leader('by', '"+y',                                         'Yank to Sys')
+xmap_leader('bp', '"+p',                                         'Paste from Sys')
 
 -- e is for 'Explore' and 'Edit'. Common usage:
 -- - `<Leader>ed` - open explorer at current working directory
