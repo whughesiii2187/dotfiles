@@ -115,7 +115,7 @@ later(function()
     },
     -- Map of filetype to formatters
     -- Make sure that necessary CLI tool is available
-    -- formatters_by_ft = { lua = { 'stylua' }, go = {'gofmt','goimports','golines','gotests'} },
+    formatters_by_ft = { go = {'gofumpt','goimports'} },
   })
 end)
 
@@ -169,6 +169,7 @@ now_if_args(function()
       "golangci-lint",
 
       -- formatters
+      "gofumpt",
       "goimports",
       "golines",
     },
