@@ -154,6 +154,9 @@ now_if_args(function()
   require('mason').setup()
 end)
 now_if_args(function()
+  require("mason-lspconfig").setup()
+end)
+now_if_args(function()
   require("mason-tool-installer").setup({
     ensure_installed = {
       -- LSP
@@ -172,13 +175,5 @@ now_if_args(function()
 
     auto_update = true,
     run_on_start = true,
-  })
-end)
-now_if_args(function()
-  require("mason-lspconfig").setup({
-    ensure_installed = {
-      "gopls",
-    },
-    automatic_installation = true,
   })
 end)

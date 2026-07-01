@@ -63,6 +63,7 @@ Config.leader_group_clues = {
 
   { mode = 'x', keys = '<Leader>g', desc = '+Git' },
   { mode = 'x', keys = '<Leader>l', desc = '+Language' },
+  { mode = 'x', keys = '<Leader>b', desc = '+Buffer' },
 }
 
 -- Helpers for a more concise `<Leader>` mappings.
@@ -93,7 +94,7 @@ nmap_leader('bs', '<Cmd>w<CR>',                                  'Save')
 nmap_leader('bw', '<Cmd>lua MiniBufremove.wipeout()<CR>',        'Wipeout')
 nmap_leader('bW', '<Cmd>lua MiniBufremove.wipeout(0, true)<CR>', 'Wipeout!')
 xmap_leader('by', '"+y',                                         'Yank to Sys')
-xmap_leader('bp', '"+p',                                         'Paste from Sys')
+nmap_leader('bp', '"+p',                                         'Paste from Sys')
 
 -- e is for 'Explore' and 'Edit'. Common usage:
 -- - `<Leader>ed` - open explorer at current working directory
