@@ -27,4 +27,10 @@ alias devssh="~/scripts/dc ssh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
-export SSH_AUTH_SOCK=/home/bill/.bitwarden-ssh-agent.sock
+
+
+if command -v snap &>/dev/null && snap list bitwarden &>/dev/null; then
+  export SSH_AUTH_SOCK=$HOME/snap/bitwarden/current/.bitwarden-ssh-agent.sock
+else
+  export SSH_AUTH_SOCK=$HOME/.bitwarden-ssh-agent.sock
+fi
