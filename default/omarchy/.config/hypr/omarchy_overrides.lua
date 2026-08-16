@@ -25,8 +25,14 @@ o.bind("SUPER + CTRL + K", "Show key bindings", "omarchy-menu-keybindings")
 -- to reclaim them. Plain SUPER + H and SUPER + K don't appear to be bound
 -- by default, but confirm with `hyprctl binds` after reload in case that
 -- changes in a future Omarchy update.
+hl.unbind("SUPER + H")
 hl.unbind("SUPER + J")
+hl.unbind("SUPER + K")
 hl.unbind("SUPER + L")
+hl.unbind("SUPER + ALT + H")
+hl.unbind("SUPER + ALT + J")
+hl.unbind("SUPER + ALT + K")
+hl.unbind("SUPER + ALT + L")
 
 o.bind("SUPER + H", "Move window focus left", hl.dsp.focus({ direction = "l" }))
 o.bind("SUPER + J", "Move window focus down", hl.dsp.focus({ direction = "d" }))
@@ -63,6 +69,8 @@ hl.config({
 
     follow_mouse = 0,
 
+    natural_scroll = true,
+
     touchpad = {
       natural_scroll = true,
       clickfinger_behavior = true,
@@ -78,14 +86,9 @@ hl.config({
 })
 
 ------------------------------------------------------------------
--- Autostart
+-- Monitors  
 ------------------------------------------------------------------
+hl.monitor({ output = "desc:AU Optronics 0xFA9B", mode = "1920x1200@60.03", position = "2151x1440", scale = 1.0 })
+hl.monitor({ output = "desc:Dell Inc. DELL U2717D 67YGV66OAUFL", mode = "2560x1440@59.95", position = "2560x0", scale = 1.0 })
+hl.monitor({ output = "desc:Dell Inc. DELL U2717D 67YGV773AMMS", mode = "2560x1440@59.95", position = "0x0", scale = 1.0 })
 
-o.launch_on_start("hyprdynamicmonitors run --enable-lid-events --disable-power-events")
-
-------------------------------------------------------------------
--- Note: default terminal ($terminal = ghostty) and default browser
--- ($browser = firefox) are no longer set in the Hyprland config at all --
--- set them once via the Omarchy menu (SUPER + ALT + SPACE) under
--- Setup > Default > Terminal / Browser instead.
-------------------------------------------------------------------
