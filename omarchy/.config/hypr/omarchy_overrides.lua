@@ -1,12 +1,3 @@
--- Personal Omarchy overrides.
--- Converted from the old hyprlang omarchy_overrides.conf (sourced via
--- hyprland.conf) to Hyprland's Lua config format (0.55+ / Omarchy 4.0+).
---
--- Load this LAST from hyprland.lua, after Omarchy's own defaults and
--- bindings/input/looknfeel/autostart requires, so it can override them --
--- the same role the old `source = ~/.config/hypr/omarchy_overrides.conf`
--- line played at the bottom of hyprland.conf.
-
 ------------------------------------------------------------------
 -- Keybinds
 ------------------------------------------------------------------
@@ -56,39 +47,84 @@ o.bind("SUPER + SHIFT + L", "Swap window to the right", hl.dsp.window.swap({ dir
 ------------------------------------------------------------------
 
 hl.config({
-  input = {
-    kb_layout = "us",
-    kb_options = "compose:caps", -- ,grp:alts_toggle
+	input = {
+		kb_layout = "us",
+		kb_options = "compose:caps", -- ,grp:alts_toggle
 
-    repeat_rate = 40,
-    repeat_delay = 600,
+		repeat_rate = 40,
+		repeat_delay = 600,
 
-    numlock_by_default = true,
+		numlock_by_default = true,
 
-    sensitivity = 0.35,
+		sensitivity = 0.35,
 
-    follow_mouse = 0,
+		follow_mouse = 0,
 
-    natural_scroll = true,
+		natural_scroll = true,
 
-    touchpad = {
-      natural_scroll = true,
-      clickfinger_behavior = true,
-      scroll_factor = 0.4,
-    },
-  },
+		touchpad = {
+			natural_scroll = true,
+			clickfinger_behavior = true,
+			scroll_factor = 0.4,
+		},
+	},
 
-  decoration = {
-    active_opacity = 0.8,
-    inactive_opacity = 0.8,
-    dim_inactive = false,
-  },
+	decoration = {
+		active_opacity = 0.8,
+		inactive_opacity = 0.8,
+		dim_inactive = false,
+	},
 })
 
 ------------------------------------------------------------------
--- Monitors  
+-- Monitors
 ------------------------------------------------------------------
 hl.monitor({ output = "desc:AU Optronics 0xFA9B", mode = "1920x1200@60.03", position = "2151x1440", scale = 1.0 })
-hl.monitor({ output = "desc:Dell Inc. DELL U2717D 67YGV66OAUFL", mode = "2560x1440@59.95", position = "2560x0", scale = 1.0 })
-hl.monitor({ output = "desc:Dell Inc. DELL U2717D 67YGV773AMMS", mode = "2560x1440@59.95", position = "0x0", scale = 1.0 })
+hl.monitor({
+	output = "desc:Dell Inc. DELL U2717D 67YGV66OAUFL",
+	mode = "2560x1440@59.95",
+	position = "2560x0",
+	scale = 1.0,
+})
+hl.monitor({
+	output = "desc:Dell Inc. DELL U2717D 67YGV773AMMS",
+	mode = "2560x1440@59.95",
+	position = "0x0",
+	scale = 1.0,
+})
 
+------------------------------------------------------------------
+-- Workspaces
+------------------------------------------------------------------
+-- 5 workspaces per external monitor: odd (1/3/5/7/9) live on the left
+-- Dell, even (2/4/6/8/10) on the right Dell -- matched by the same desc:
+-- (EDID) identifiers as the monitor rules above, so a workspace's home
+-- monitor doesn't shift if a cable moves to a different port.
+--
+-- `persistent = true` keeps each workspace alive (and on its monitor)
+-- even with no windows open, instead of being reshuffled/GC'd. `default`
+-- marks the one Hyprland shows on that monitor when nothing else is
+-- requested. Undocked mode needs no rule of its own: when both externals
+-- disconnect, Hyprland natively reflows all ten workspaces onto whatever
+-- monitor remains (the laptop panel), and moves them back the moment
+-- their bound monitor reconnects -- that's core Hyprland behavior, not
+-- something this config has to implement.
+local LEFT_MONITOR = "desc:Dell Inc. DELL U2717D 67YGV773AMMS"
+local RIGHT_MONITOR = "desc:Dell Inc. DELL U2717D 67YGV66OAUFL"
+
+for i = 1, 9, 2 do
+	hl.workspace_rule({
+		workspace = tostring(i),
+		monitor = LEFT_MONITOR,
+		default = (i == 1),
+		persistent = true,
+	})
+end
+for i = 2, 10, 2 do
+	hl.workspace_rule({
+		workspace = tostring(i),
+		monitor = RIGHT_MONITOR,
+		default = (i == 2),
+		persistent = true,
+	})
+end
