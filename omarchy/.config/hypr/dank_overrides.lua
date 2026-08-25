@@ -48,6 +48,32 @@ hl.bind("SUPER + BACKSPACE", hl.dsp.window.set_prop({ window = "activewindow", p
 -- movement, so re-home the lock command on SUPER + CTRL + L instead.
 hl.bind("SUPER + CTRL + L", hl.dsp.exec_cmd("dms ipc call lock lock"), { description = "Lock screen" })
 
+-- Volume keys
+-- DMS's default binds (dms/binds.lua) route these through
+-- `dms ipc call audio increment/decrement/mute`, which goes through
+-- Quickshell's native PwNode.audio write path. On the Logi Z207 Bluetooth
+-- speaker that write silently no-ops -- the OSD slider updates locally but
+-- the change never reaches the real PipeWire sink. wpctl writes straight
+-- to the live default sink instead, which is confirmed to actually work.
+hl.unbind("XF86AudioRaiseVolume")
+hl.unbind("XF86AudioLowerVolume")
+hl.unbind("XF86AudioMute")
+hl.bind(
+	"XF86AudioRaiseVolume",
+	hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.0"),
+	{ locked = true, repeating = true, description = "Raise volume" }
+)
+hl.bind(
+	"XF86AudioLowerVolume",
+	hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),
+	{ locked = true, repeating = true, description = "Lower volume" }
+)
+hl.bind(
+	"XF86AudioMute",
+	hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),
+	{ locked = true, description = "Toggle mute" }
+)
+
 -- Toggle laptop display (mimics Omarchy's SUPER + CTRL + Delete), plus
 -- lid-switch clamshell handling: disable the panel on lid-close when docked
 -- to an external monitor, and recover it on lid-open. Omarchy's own
