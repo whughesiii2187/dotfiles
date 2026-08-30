@@ -19,12 +19,12 @@ hl.bind(
 )
 hl.bind(
 	"SUPER + CTRL + 4",
-	hl.dsp.exec_cmd("dms screenshot region"),
+	hl.dsp.exec_cmd("dms screenshot region -d ~/Pictures/Screenshots"),
 	{ description = "Screenshot area (select region)" }
 )
 hl.bind(
 	"SUPER + CTRL + 5",
-	hl.dsp.exec_cmd("dms screenshot full --no-clipboard"),
+	hl.dsp.exec_cmd("dms screenshot full --no-clipboard -d ~/Pictures/Screenshots"),
 	{ description = "Screenshot fullscreen to file" }
 )
 -- Note: unlike omarchy-capture-screenshot, DMS has no built-in post-capture
@@ -60,7 +60,7 @@ hl.unbind("XF86AudioLowerVolume")
 hl.unbind("XF86AudioMute")
 hl.bind(
 	"XF86AudioRaiseVolume",
-	hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.0"),
+	hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.5"),
 	{ locked = true, repeating = true, description = "Raise volume" }
 )
 hl.bind(
@@ -190,8 +190,8 @@ hl.config({
 	},
 
 	decoration = {
-		active_opacity = 0.8,
-		inactive_opacity = 0.8,
+		active_opacity = 0.9,
+		inactive_opacity = 0.9,
 		dim_inactive = false,
 	},
 
@@ -236,8 +236,8 @@ hl.monitor({
 ------------------------------------------------------------------
 -- Workspaces
 ------------------------------------------------------------------
--- 5 workspaces per external monitor: odd (1/3/5/7/9) live on the left
--- Dell, even (2/4/6/8/10) on the right Dell -- matched by the same desc:
+-- 5 workspaces per external monitor: odd (1/3/5) live on the left
+-- Dell, even (2/4/6) on the right Dell -- matched by the same desc:
 -- (EDID) identifiers as the monitor rules above, so a workspace's home
 -- monitor doesn't shift if a cable moves to a different port.
 --
@@ -252,7 +252,7 @@ hl.monitor({
 local LEFT_MONITOR = "desc:Dell Inc. DELL U2717D 67YGV773AMMS"
 local RIGHT_MONITOR = "desc:Dell Inc. DELL U2717D 67YGV66OAUFL"
 
-for i = 1, 9, 2 do
+for i = 1, 5, 2 do
 	hl.workspace_rule({
 		workspace = tostring(i),
 		monitor = LEFT_MONITOR,
@@ -260,7 +260,7 @@ for i = 1, 9, 2 do
 		persistent = true,
 	})
 end
-for i = 2, 10, 2 do
+for i = 2, 6, 2 do
 	hl.workspace_rule({
 		workspace = tostring(i),
 		monitor = RIGHT_MONITOR,

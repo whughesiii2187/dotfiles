@@ -1,0 +1,193 @@
+// Personal DankLinux (DMS) overrides -- niri port of ../hypr/dank_overrides.lua
+//
+// Include this LAST in config.kdl, after DMS's own dms/*.kdl includes, e.g.:
+//   include optional=true "dms/binds.kdl"
+//   ...
+//   include optional=true "dank_overrides.kdl"
+//
+// niri's binds merge per-key (a later `binds` block overrides just the keys
+// it redefines, see Configuration:-Include.md#binds), so this only needs to
+// restate the keys that actually change versus dms/binds.kdl.
+//
+// Two things from the Hyprland version don't have a niri equivalent and are
+// intentionally left out:
+//   - Special workspace (scratchpad): niri has no scratchpad concept.
+//   - SUPER+CTRL+K keybind-menu shortcut: niri already uses Mod+Ctrl+K for
+//     focus-monitor-up (and Mod+Shift+Ctrl+K for move-column-to-monitor-up)
+//     -- K is consistently "monitor up" across modifier stacks in
+//     dms/binds.kdl, so this doesn't get a second bind here. niri's native
+//     Mod+Shift+Slash (show-hotkey-overlay) covers the same "what are my
+//     keybinds" need.
+
+// ------------------------------------------------------------------
+// Keybinds
+// ------------------------------------------------------------------
+
+binds {
+    // === Screenshots ===
+    // Same `dms screenshot` commands as the Hyprland override -- this is
+    // DMS's own tool, not compositor-specific.
+    Mod+Ctrl+3 hotkey-overlay-title="Screenshot fullscreen to clipboard" {
+        spawn "dms" "screenshot" "full" "--no-file";
+    }
+    Mod+Ctrl+4 hotkey-overlay-title="Screenshot area (select region)" {
+        spawn "dms" "screenshot" "region" "-d" "~/Pictures/Screenshots";
+    }
+    Mod+Ctrl+5 hotkey-overlay-title="Screenshot fullscreen to file" {
+        spawn "dms" "screenshot" "full" "--no-clipboard" "-d" "~/Pictures/Screenshots";
+    }
+
+    // === Toggle window opacity ===
+    // Pairs with the `window-rule { opacity 0.9; }` below: niri's
+    // toggle-window-rule-opacity flips the focused window between its rule
+    // opacity and fully opaque, which is exactly the SUPER+BACKSPACE
+    // behavior from the Hyprland override.
+    Mod+BackSpace { toggle-window-rule-opacity; }
+
+    // === Screen lock ===
+    // dms/binds.kdl already binds Mod+Alt+L to lock -- reclaimed below for
+    // "move workspace to monitor" (same reasoning as the Hyprland override
+    // reclaiming SUPER+ALT+L), so lock moves to Ctrl+Alt+L instead. Not
+    // SUPER+CTRL+L: that's already focus-monitor-right in dms/binds.kdl.
+    Ctrl+Alt+L hotkey-overlay-title="Lock Screen" {
+        spawn "dms" "ipc" "call" "lock" "lock";
+    }
+
+    // === Volume keys ===
+    // dms/binds.kdl routes these through `dms ipc call audio
+    // increment/decrement/mute`, which goes through Quickshell's native
+    // PwNode.audio write path. Same as the Hyprland override: on the Logi
+    // Z207 Bluetooth speaker that write silently no-ops. This is a
+    // Quickshell-side bug, not a Hyprland one, so it applies here too.
+    // wpctl writes straight to the live default sink instead.
+    XF86AudioRaiseVolume allow-when-locked=true repeat=true {
+        spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+" "-l" "1.5";
+    }
+    XF86AudioLowerVolume allow-when-locked=true repeat=true {
+        spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-";
+    }
+    XF86AudioMute allow-when-locked=true {
+        spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle";
+    }
+
+    // === Toggle laptop display ===
+    // Mimics Omarchy's SUPER+CTRL+Delete. Lid-switch handling itself is
+    // native niri (`switch-events` below), not a keybind -- see
+    // scripts/laptop-display.sh.
+    Mod+Ctrl+Delete hotkey-overlay-title="Toggle laptop display" {
+        spawn "/home/bill/.config/niri/scripts/laptop-display.sh" "toggle";
+    }
+
+    // === Navigate between monitors ===
+    // Already bound in dms/binds.kdl (Mod+Ctrl+H/J/K/L, Mod+Ctrl+Left/Right)
+    // and works today -- restated here only to add hotkey-overlay-title,
+    // since niri's hotkey overlay (Mod+Shift+Slash) shows a hardcoded list
+    // of actions and hides anything else unless it's explicitly titled.
+    Mod+Ctrl+H hotkey-overlay-title="Focus Monitor Left" { focus-monitor-left; }
+    Mod+Ctrl+J hotkey-overlay-title="Focus Monitor Down" { focus-monitor-down; }
+    Mod+Ctrl+K hotkey-overlay-title="Focus Monitor Up" { focus-monitor-up; }
+    Mod+Ctrl+L hotkey-overlay-title="Focus Monitor Right" { focus-monitor-right; }
+
+    // === Move workspace to another monitor ===
+    // dms/binds.kdl doesn't bind move-workspace-to-monitor-*. Mod+Alt+L is
+    // DMS's default lock shortcut (moved to Ctrl+Alt+L above), freeing up
+    // the whole Mod+Alt+H/J/K/L row here, same as the Hyprland override.
+    Mod+Alt+H hotkey-overlay-title="Move Workspace to Left Monitor" { move-workspace-to-monitor-left; }
+    Mod+Alt+J hotkey-overlay-title="Move Workspace to Monitor Below" { move-workspace-to-monitor-down; }
+    Mod+Alt+K hotkey-overlay-title="Move Workspace to Monitor Above" { move-workspace-to-monitor-up; }
+    Mod+Alt+L hotkey-overlay-title="Move Workspace to Right Monitor" { move-workspace-to-monitor-right; }
+
+    // === Swap active window with the one next to it ===
+    // dms/binds.kdl binds plain Mod+Shift+H/L to move-column-left/right;
+    // this overrides them to swap instead, matching the Hyprland override.
+    // Mod+Shift+J/K are left alone: they're already move-window-down/up,
+    // which (moving a window's position within its column) already swaps
+    // it with its neighbor -- there's no separate "swap" action needed
+    // vertically the way there is horizontally between columns.
+    Mod+Shift+H { swap-window-left; }
+    Mod+Shift+L { swap-window-right; }
+}
+
+switch-events {
+    lid-close { spawn "/home/bill/.config/niri/scripts/laptop-display.sh" "lid-close"; }
+    lid-open { spawn "/home/bill/.config/niri/scripts/laptop-display.sh" "lid-open"; }
+}
+
+// Poll-based stand-in for Hyprland's monitor.added/monitor.removed hooks --
+// niri's event-stream IPC has no output-added/removed event to hook into.
+// See scripts/laptop-display.sh's watch()/reconcile() for the logic.
+spawn-sh-at-startup "/home/bill/.config/niri/scripts/laptop-display.sh watch"
+
+// ------------------------------------------------------------------
+// Input and look-and-feel
+// ------------------------------------------------------------------
+
+input {
+    keyboard {
+        xkb {
+            layout "us"
+            options "compose:caps" // ,grp:alts_toggle
+        }
+
+        repeat-rate 40
+        repeat-delay 600
+
+        numlock
+    }
+
+    // follow_mouse=0 / mouse_move_focuses_monitor=false from the Hyprland
+    // override need no equivalent here: niri's focus-follows-mouse is off
+    // by default (must be explicitly enabled), so click-to-focus for both
+    // windows and monitors is already the baseline behavior.
+
+    mouse {
+        natural-scroll
+        accel-speed 0.35
+    }
+
+    touchpad {
+        natural-scroll
+        click-method "clickfinger"
+        scroll-factor 0.4
+    }
+}
+
+// Make inactive and active windows uniformly semitransparent (no
+// is-active-based dimming, matching dim_inactive=false in the Hyprland
+// override). Toggled per-window back to fully opaque via Mod+BackSpace
+// above.
+window-rule {
+    opacity 0.9
+}
+
+// ------------------------------------------------------------------
+// Monitors
+// ------------------------------------------------------------------
+// Re-declares the two external Dells by their manufacturer/model/serial
+// string (from `niri msg outputs`) rather than DMS's own generated
+// dms/outputs.kdl, which uses port names (DP-1, DP-8) -- those can silently
+// swap which physical monitor lands at which position if a cable moves to a
+// different port. eDP-1 (the laptop panel) is deliberately left out here:
+// it's controlled live by laptop-display.sh (bound above) and the
+// switch-events lid handling, not by a static block that would fight both.
+
+output "Dell Inc. DELL U2717D 67YGV66OAUFL" {
+    mode "2560x1440@59.951"
+    position x=2560 y=0
+    scale 1
+}
+output "Dell Inc. DELL U2717D 67YGV773AMMS" {
+    mode "2560x1440@59.951"
+    position x=0 y=0
+    scale 1
+}
+
+// ------------------------------------------------------------------
+// Workspaces
+// ------------------------------------------------------------------
+// The Hyprland override pins workspaces 1/3/5 and 2/4/6 to specific
+// monitors by desc:, with `persistent` keeping them alive with no windows.
+// niri doesn't need this: workspaces belong to a specific output natively
+// (each monitor already has its own independent 1, 2, 3, ... series, always
+// present even empty), which is the same end result this section produced
+// on Hyprland. No override necessary.
