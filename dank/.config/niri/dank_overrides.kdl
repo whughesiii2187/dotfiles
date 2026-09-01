@@ -31,10 +31,10 @@ binds {
         spawn "dms" "screenshot" "full" "--no-file";
     }
     Mod+Ctrl+4 hotkey-overlay-title="Screenshot area (select region)" {
-        spawn "dms" "screenshot" "region" "-d" "~/Pictures/Screenshots";
+        spawn "dms" "screenshot" "region" "-d" "/home/bill/Pictures/Screenshots";
     }
     Mod+Ctrl+5 hotkey-overlay-title="Screenshot fullscreen to file" {
-        spawn "dms" "screenshot" "full" "--no-clipboard" "-d" "~/Pictures/Screenshots";
+        spawn "dms" "screenshot" "full" "--no-clipboard" "-d" "/home/bill/Pictures/Screenshots";
     }
 
     // === Toggle window opacity ===
