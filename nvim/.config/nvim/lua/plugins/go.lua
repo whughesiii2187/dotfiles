@@ -2,7 +2,7 @@
 -- LazyVim lang.go extra (which pulls in dap-go, gotests, etc.) is enabled.
 return {
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, {
         "gopls",
