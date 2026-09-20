@@ -2,19 +2,17 @@
 -- LazyVim lang.go extra (which pulls in dap-go, gotests, etc.) is enabled.
 return {
   {
-    -- bare name: extends whichever mason.nvim source LazyVim core is
-    -- actually pinned to, instead of forcing an owner that may not match
-    -- (mason.nvim moved from williamboman/ to mason-org/ upstream; pinning
-    -- a specific owner here caused a source mismatch with LazyVim core and
-    -- broke ensure_installed entirely)
-    "mason.nvim",
-    opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, {
+    -- must match LazyVim core's own source string exactly ("mason-org/mason.nvim");
+    -- LazyVim's mason.nvim spec sets opts_extend = { "ensure_installed" }, so a
+    -- plain table here gets concatenated onto the core list automatically
+    "mason-org/mason.nvim",
+    opts = {
+      ensure_installed = {
         "gopls",
         "gofumpt",
         "goimports",
-      })
-    end,
+      },
+    },
   },
 
   {
