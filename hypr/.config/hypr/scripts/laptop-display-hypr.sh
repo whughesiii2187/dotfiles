@@ -59,10 +59,29 @@ toggle() {
 }
 
 # Lid closed: only go into clamshell (panel off) when docked to an external
-# monitor. A bare lid close with no external display is a normal
-# suspend -- leave the panel alone and let systemd-logind handle sleep.
+# monitor. A bare lid close with no external display used to be left to
+# systemd-logind's own lid handling (which suspends, and locks along the
+# way). That's no longer true: /etc/systemd/logind.conf.d/no-lid-suspend.conf
+# sets HandleLidSwitch=ignore (all variants) so DMS's idle/lock config is the
+# sole authority instead of fighting logind's docked-detection heuristic (see
+# basecamp/omarchy suspend-after-lock bug, 2026-09-15). With logind out of
+# the loop, nothing else reacts to an undocked lid close, so lock explicitly
+# here.
+#
+# `loginctl lock-session` instead of `dms ipc call lock lock`: this is the
+# standard systemd-logind lock call, not a DMS-specific one. DMS's
+# "loginctlLockIntegration" setting (Lock Screen settings tab, on by
+# default -- see /usr/share/quickshell/dms/Modules/Lock/Lock.qml) already
+# subscribes to logind's own session-lock dbus signal and shows DMS's native
+# lock screen in response, so this has the same effect as the direct IPC
+# call without hardcoding a DMS command in a script that's otherwise just
+# talking to hyprctl/logind.
 lid_close() {
-  other_monitor_active && disable || true
+  if other_monitor_active; then
+    disable
+  else
+    loginctl lock-session
+  fi
 }
 
 # Lid opened: recover the panel, unless the user manually turned it off via

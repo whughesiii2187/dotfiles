@@ -1,0 +1,149 @@
+// Personal niri overrides (compositor-generic; no DMS/shell dependency).
+//
+// DMS/DankLinux-specific binds (the ones that reclaim a DMS-default key or
+// are DMS UI features) live in dank_overrides.kdl instead. Include this
+// LAST in config.kdl, after DMS's own dms/*.kdl includes, e.g.:
+//   include optional=true "dms/binds.kdl"
+//   ...
+//   include optional=true "niri_overrides.kdl"
+//   include optional=true "dank_overrides.kdl"
+//
+// niri's binds merge per-key (a later `binds` block overrides just the keys
+// it redefines, see Configuration:-Include.md#binds), so unlike the
+// Hyprland side there's no unbind-then-rebind dance needed here -- a plain
+// bind on a key DMS already claims just replaces it.
+
+// ------------------------------------------------------------------
+// Keybinds
+// ------------------------------------------------------------------
+
+binds {
+    // === Toggle window opacity ===
+    // Pairs with the `window-rule { opacity 0.9; }` below: niri's
+    // toggle-window-rule-opacity flips the focused window between its rule
+    // opacity and fully opaque, which is exactly the SUPER+BACKSPACE
+    // behavior from the Hyprland override.
+    Mod+BackSpace { toggle-window-rule-opacity; }
+
+    // === Screenshots ===
+    // niri has a native screenshot UI (`screenshot`) plus screen/window
+    // capture actions -- no external tool needed, unlike the Hyprland side
+    // (which has no built-in screenshot UI and needs grim/slurp/swappy).
+    // Both capture actions always copy to the clipboard; `write-to-disk=
+    // false` is the only way to skip the file -- there's no flag for the
+    // reverse (file without clipboard).
+    Mod+Ctrl+3 hotkey-overlay-title="Screenshot fullscreen to clipboard" {
+        screenshot-screen write-to-disk=false;
+    }
+    Mod+Ctrl+4 hotkey-overlay-title="Screenshot area (select region)" {
+        screenshot;
+    }
+    Mod+Ctrl+5 hotkey-overlay-title="Screenshot fullscreen to file" {
+        screenshot-screen;
+    }
+
+    // === Volume keys ===
+    // dms/binds.kdl routes these through `dms ipc call audio
+    // increment/decrement/mute`, which goes through Quickshell's native
+    // PwNode.audio write path. On the Logi Z207 Bluetooth speaker that
+    // write silently no-ops. wpctl writes straight to the live default sink
+    // instead -- works regardless of shell. niri overrides a conflicting
+    // key per-key on include, no unbind needed (unlike Hyprland).
+    XF86AudioRaiseVolume allow-when-locked=true repeat=true {
+        spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+" "-l" "1.5";
+    }
+    XF86AudioLowerVolume allow-when-locked=true repeat=true {
+        spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-";
+    }
+    XF86AudioMute allow-when-locked=true {
+        spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle";
+    }
+
+    // === Toggle laptop display ===
+    // Mimics Omarchy's SUPER+CTRL+Delete. Lid-switch handling itself is
+    // native niri (`switch-events` below), not a keybind -- see
+    // scripts/laptop-display-niri.sh. Just `niri msg`/the local script -- no
+    // shell dependency.
+    Mod+Ctrl+Delete hotkey-overlay-title="Toggle laptop display" {
+        spawn "~/.config/niri/scripts/laptop-display-niri.sh" "toggle";
+    }
+
+    // === Move workspace to another monitor ===
+    // dms/binds.kdl doesn't bind move-workspace-to-monitor-*. Mod+Alt+L is
+    // DMS's default lock shortcut, freeing up the whole Mod+Alt+H/J/K/L row
+    // here, same as the Hyprland override.
+    Mod+Alt+H hotkey-overlay-title="Move Workspace to Left Monitor" { move-workspace-to-monitor-left; }
+    Mod+Alt+J hotkey-overlay-title="Move Workspace to Monitor Below" { move-workspace-to-monitor-down; }
+    Mod+Alt+K hotkey-overlay-title="Move Workspace to Monitor Above" { move-workspace-to-monitor-up; }
+    Mod+Alt+L hotkey-overlay-title="Move Workspace to Right Monitor" { move-workspace-to-monitor-right; }
+
+    // === Swap active window with the one next to it ===
+    // dms/binds.kdl binds plain Mod+Shift+H/L to move-column-left/right;
+    // this overrides them to swap instead, matching the Hyprland override.
+    // Mod+Shift+J/K are left alone: they're already move-window-down/up,
+    // which (moving a window's position within its column) already swaps
+    // it with its neighbor -- there's no separate "swap" action needed
+    // vertically the way there is horizontally between columns.
+    Mod+Shift+H { swap-window-left; }
+    Mod+Shift+L { swap-window-right; }
+}
+
+switch-events {
+    lid-close { spawn "~/.config/niri/scripts/laptop-display-niri.sh" "lid-close"; }
+    lid-open { spawn "~/.config/niri/scripts/laptop-display-niri.sh" "lid-open"; }
+}
+
+// Poll-based stand-in for Hyprland's monitor.added/monitor.removed hooks --
+// niri's event-stream IPC has no output-added/removed event to hook into.
+// See scripts/laptop-display-niri.sh's watch()/reconcile() for the logic.
+spawn-sh-at-startup "~/.config/niri/scripts/laptop-display-niri.sh watch"
+
+// ------------------------------------------------------------------
+// Input and look-and-feel
+// ------------------------------------------------------------------
+
+input {
+    keyboard {
+        xkb {
+            layout "us"
+            options "compose:caps" // ,grp:alts_toggle
+        }
+
+        repeat-rate 40
+        repeat-delay 600
+
+        numlock
+    }
+
+    // follow_mouse=0 / mouse_move_focuses_monitor=false from the Hyprland
+    // override need no equivalent here: niri's focus-follows-mouse is off
+    // by default (must be explicitly enabled), so click-to-focus for both
+    // windows and monitors is already the baseline behavior.
+
+    mouse {
+        natural-scroll
+        accel-speed 0.35
+    }
+
+    // Pointing-device sections (mouse/touchpad/trackpoint) are one of niri's
+    // documented non-merging sections (Configuration:-Include.md#merging):
+    // a later `touchpad { }` fully replaces dms/input.kdl's, it doesn't
+    // merge field-by-field the way `binds` does. dms/input.kdl sets `tap`
+    // and `dwt` -- restated here so tap-to-click and disable-while-typing
+    // don't silently disappear once this file loads.
+    touchpad {
+        tap
+        dwt
+        natural-scroll
+        click-method "clickfinger"
+        scroll-factor 0.4
+    }
+}
+
+// Make inactive and active windows uniformly semitransparent (no
+// is-active-based dimming, matching dim_inactive=false in the Hyprland
+// override). Toggled per-window back to fully opaque via Mod+BackSpace
+// above.
+window-rule {
+    opacity 0.9
+}
