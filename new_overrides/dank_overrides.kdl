@@ -1,0 +1,50 @@
+// Personal DankLinux (DMS) overrides for niri.
+//
+// niri's `binds` merge per-key (Configuration:-Include.md#merging) -- a
+// later include simply overrides the keys it redefines, no unbind needed.
+// So unlike the Hyprland side (see dank_overrides.lua's header), there's no
+// strict load-order requirement between this file and niri_overrides.kdl;
+// both already load after DMS's own dms/*.kdl includes. Include this LAST
+// in config.kdl, e.g.:
+//   include optional=true "dms/binds.kdl"
+//   ...
+//   include optional=true "niri_overrides.kdl"
+//   include optional=true "dank_overrides.kdl"
+//
+// What's left here: the lock keybind -- its command is generic (`loginctl
+// lock-session`), but it still reclaims a DMS-default key so it's grouped
+// with the rest of the DMS-default reclaiming for now -- and a
+// hotkey-overlay-title restatement for keys DMS already binds. Everything
+// else that used to live here (screenshots, volume keys, laptop-display
+// toggle, monitor-move, window-swap) moved to niri_overrides.kdl since none
+// of it actually depends on DMS.
+
+binds {
+    // === Screen lock ===
+    // Matches the Hyprland override's SUPER+CTRL+L. dms/binds.kdl already
+    // binds Mod+Ctrl+L to focus-monitor-right -- reclaimed here for lock.
+    // Mod+Ctrl+Right still reaches focus-monitor-right; only the vim-style
+    // L alias moves.
+    //
+    // `loginctl lock-session` instead of `dms ipc call lock lock`: this is
+    // the standard systemd-logind lock call, not a DMS-specific one. DMS's
+    // "loginctlLockIntegration" setting (Lock Screen settings tab, on by
+    // default -- see /usr/share/quickshell/dms/Modules/Lock/Lock.qml)
+    // already subscribes to logind's own session-lock dbus signal and shows
+    // DMS's native lock screen in response, so this has the same effect as
+    // the direct IPC call.
+    Mod+Ctrl+L hotkey-overlay-title="Lock Screen" {
+        spawn "loginctl" "lock-session";
+    }
+
+    // === Navigate between monitors ===
+    // Already bound in dms/binds.kdl (Mod+Ctrl+H/J/K, Mod+Ctrl+Left/Right)
+    // and works today -- restated here only to add hotkey-overlay-title,
+    // since niri's hotkey overlay (Mod+Shift+Slash) shows a hardcoded list
+    // of actions and hides anything else unless it's explicitly titled.
+    // Mod+Ctrl+L is deliberately left out here: it's reclaimed for Lock
+    // Screen above.
+    Mod+Ctrl+H hotkey-overlay-title="Focus Monitor Left" { focus-monitor-left; }
+    Mod+Ctrl+J hotkey-overlay-title="Focus Monitor Down" { focus-monitor-down; }
+    Mod+Ctrl+K hotkey-overlay-title="Focus Monitor Up" { focus-monitor-up; }
+}
