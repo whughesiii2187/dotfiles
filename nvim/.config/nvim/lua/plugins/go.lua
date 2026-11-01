@@ -1,5 +1,9 @@
 -- Always install core Go tooling via mason, independent of whether the
 -- LazyVim lang.go extra (which pulls in dap-go, gotests, etc.) is enabled.
+-- gopls and goimports are built by mason with `go install`, so they are only
+-- enabled where a Go toolchain exists (devcontainers, not the host).
+local has_go = vim.fn.executable("go") == 1
+
 return {
   {
     -- must match LazyVim core's own source string exactly ("mason-org/mason.nvim");
@@ -7,10 +11,12 @@ return {
     -- plain table here gets concatenated onto the core list automatically
     "mason-org/mason.nvim",
     opts = {
-      ensure_installed = {
+      ensure_installed = has_go and {
         "gopls",
         "gofumpt",
         "goimports",
+      } or {
+        "gofumpt",
       },
     },
   },
@@ -19,7 +25,7 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        gopls = {},
+        gopls = { enabled = has_go },
       },
     },
   },
@@ -28,7 +34,7 @@ return {
     "stevearc/conform.nvim",
     opts = {
       formatters_by_ft = {
-        go = { "goimports", "gofumpt" },
+        go = has_go and { "goimports", "gofumpt" } or { "gofumpt" },
       },
     },
   },
